@@ -152,7 +152,7 @@ public class UsersDao extends Dao {
 				}
 			}
 		} 
-		
+		 
 		if (count > 0) {
 			return true;
 		} else {
