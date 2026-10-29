@@ -8,7 +8,7 @@ import java.util.List;
 
 import bean.Products;
 
-public class ProductsDAO extends DAO {
+public class ProductsDao extends Dao {
 	
 	//	一覧取得
 	public List<Products> findAll() throws Exception {
