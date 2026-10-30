@@ -12,14 +12,14 @@ import bean.Users;
 
 public class UsersDao extends Dao {
 	//個人番号から情報を取得
-	public Users get(int user_number) throws Exception {
+	public Users get(int userNumber) throws Exception {
 		Users users = new Users();
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		
 		try {
 			statement = connection.prepareStatement("select * from users where user_number=?");
-			statement.setInt(1, user_number);
+			statement.setInt(1, userNumber);
 			ResultSet rSet = statement.executeQuery();
 			GroupsDao groupsDao = new GroupsDao();
 			

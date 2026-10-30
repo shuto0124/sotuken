@@ -2,14 +2,14 @@ package bean;
 
 public class Orders implements java.io.Serializable {
 	
-	private int order_number;
+	private int orderNumber;
 	private Users users;
 	private Reservations reservations;
-	private int total_amount;
-	private String payment_status;
+	private int totalAmount;
+	private String paymentStatus;
 	
 	public int getOrderNumber() {
-		return order_number;
+		return orderNumber;
 	}
 
 	public Users getUsers() {
@@ -21,15 +21,15 @@ public class Orders implements java.io.Serializable {
 	}
 	
 	public int getTotalAmount() {
-		return total_amount;
+		return totalAmount;
 	}
 	
 	public String getPaymentStatus() {
-		return payment_status;
+		return paymentStatus;
 	}
 	
-	public void setOrderNumber(int order_number) {
-		this.order_number = order_number;
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 	
 	public void setUsers(Users users) {
@@ -40,12 +40,12 @@ public class Orders implements java.io.Serializable {
 		this.reservations = reservations;
 	}
 	
-	public void setTotalAmount(int total_amount) {
-		this.total_amount = total_amount;
+	public void setTotalAmount(int totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
-	public void setPaymentStatus(String payment_status) {
-		this.payment_status = payment_status;
+	public void setPaymentStatus(String paymentStatus) {
+		this.paymentStatus = paymentStatus;
 	}
 
 }

@@ -2,33 +2,33 @@ package bean;
 
 public class Tables implements java.io.Serializable {
 	
-	private int table_number;
-	private String table_type;
-	private String table_status;
+	private int tableNumber;
+	private String tableType;
+	private String tableStatus;
 
 	
 	public int getTableNumber() {
-		return table_number;
+		return tableNumber;
 	}
 
 	public String getTableType() {
-		return table_type;
+		return tableType;
 	}
 	
 	public String getTableStatus() {
-		return table_status;
+		return tableStatus;
 	}
 	
-	public void setTableNumber(int table_number) {
-		this.table_number = table_number;
+	public void setTableNumber(int tableNumber) {
+		this.tableNumber = tableNumber;
 	}
 	
-	public void setTableType(String table_type) {
-		this.table_type = table_type;
+	public void setTableType(String tableType) {
+		this.tableType = tableType;
 	}
 	
-	public void setTableStatus(String table_status) {
-		this.table_status = table_status;
+	public void setTableStatus(String tableStatus) {
+		this.tableStatus = tableStatus;
 	}
 	
 

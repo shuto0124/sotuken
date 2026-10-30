@@ -2,34 +2,34 @@ package bean;
 
 public class Carts implements java.io.Serializable {
 	
-	private int cart_number;
+	private int cartNumber;
 	//カートからユーザーを参照することはないのでUsersbeanをもたせない
-	private int user_number;
-	private int cart_total;
+	private int userNumber;
+	private int cartTotal;
 
 	
 	public int getCartNumber() {
-		return cart_number;
+		return cartNumber;
 	}
 
 	public int getUserNumber() {
-		return user_number;
+		return userNumber;
 	}
 	
 	public int getCartTotal() {
-		return cart_total;
+		return cartTotal;
 	}
 	
-	public void setCartNumber(int cart_number) {
-		this.cart_number = cart_number;
+	public void setCartNumber(int cartNumber) {
+		this.cartNumber = cartNumber;
 	}
 	
-	public void setUserNumber(int user_number) {
-		this.user_number = user_number;
+	public void setUserNumber(int userNumber) {
+		this.userNumber = userNumber;
 	}
 	
-	public void setCartTotal(int cart_total) {
-		this.cart_total = cart_total;
+	public void setCartTotal(int cartTotal) {
+		this.cartTotal = cartTotal;
 	}
 	
 }

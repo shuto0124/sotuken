@@ -4,13 +4,13 @@ import java.time.LocalTime;
 
 public class Reservations implements java.io.Serializable {
 	
-	private int reservation_number;
+	private int reservationNumber;
 	private Groups groups;
 	private Tables tables;
-	private LocalTime time_limit;
+	private LocalTime timeLimit;
 	
 	public int getReservationNumber() {
-		return reservation_number;
+		return reservationNumber;
 	}
 
 	public Groups getGroups() {
@@ -22,11 +22,11 @@ public class Reservations implements java.io.Serializable {
 	}
 	
 	public LocalTime getTimeLimit() {
-		return time_limit;
+		return timeLimit;
 	}
 	
-	public void setReservationNumber(int reservation_number) {
-		this.reservation_number = reservation_number;
+	public void setReservationNumber(int reservationNumber) {
+		this.reservationNumber = reservationNumber;
 	}
 	
 	public void setGroups(Groups groups) {
@@ -37,8 +37,8 @@ public class Reservations implements java.io.Serializable {
 		this.tables = tables;
 	}
 	
-	public void setTimeLimit(LocalTime time_limit) {
-		this.time_limit = time_limit;
+	public void setTimeLimit(LocalTime timeLimit) {
+		this.timeLimit = timeLimit;
 	}
 	
 }

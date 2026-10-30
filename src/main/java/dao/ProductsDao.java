@@ -13,7 +13,7 @@ public class ProductsDao extends Dao {
 	//	一覧取得
 	public List<Products> findAll() throws Exception {
 		List<Products> list = new ArrayList<>();
-		String sql = "SELECT product_name, product_image, product_price FROM Products ORDER BY product_name";
+		String sql = "SELECT product_number, product_name, product_image, product_price FROM Products ORDER BY product_number";
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql);
 			 ResultSet rs = st.executeQuery()) {
@@ -21,6 +21,7 @@ public class ProductsDao extends Dao {
 			while (rs.next()) {
 				Products product = new Products();
 				
+				product.setProductNumber(rs.getInt("product_number"));
 				product.setProductName(rs.getString("product_name"));
 				product.setProductImage(rs.getString("product_image"));
 				product.setProductPrice(rs.getInt("product_price"));

@@ -2,19 +2,19 @@ package bean;
 
 public class CartDetails implements java.io.Serializable {
 	
-	private int cart_detail_number;
+	private int cartDetailNumber;
 	//カート明細からカートを参照することはないのでCartsbeanをもたせない
-	private int cart_number;
+	private int cartNumber;
 	private Products products;
 	private int quantity;
-	private int cart_subtotal;
+	private int cartSubtotal;
 	
 	public int getCartDetailNumber() {
-		return cart_detail_number;
+		return cartDetailNumber;
 	}
 
 	public int getCartNumber() {
-		return cart_number;
+		return cartNumber;
 	}
 	
 	public Products getProducts() {
@@ -26,15 +26,15 @@ public class CartDetails implements java.io.Serializable {
 	}
 	
 	public int getCartSubtotal() {
-		return cart_subtotal;
+		return cartSubtotal;
 	}
 	
-	public void setCartDetailNumber(int cart_detail_number) {
-		this.cart_detail_number = cart_detail_number;
+	public void setCartDetailNumber(int cartDetailNumber) {
+		this.cartDetailNumber = cartDetailNumber;
 	}
 	
-	public void setCartNumber(int cart_number) {
-		this.cart_number = cart_number;
+	public void setCartNumber(int cartNumber) {
+		this.cartNumber = cartNumber;
 	}
 	
 	public void setProducts(Products products) {
@@ -45,8 +45,8 @@ public class CartDetails implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 	
-	public void setCartSubtotal(int cart_subtotal) {
-		this.cart_subtotal = cart_subtotal;
+	public void setCartSubtotal(int cartSubtotal) {
+		this.cartSubtotal = cartSubtotal;
 	}
 
 }

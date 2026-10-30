@@ -2,59 +2,59 @@ package bean;
 
 public class Products implements java.io.Serializable {
 	
-	private int product_number;
-	private String product_name;
-	private String product_description;
-	private int product_price;
-	private int product_stock;
-	private String product_image;
+	private int productNumber;
+	private String productName;
+	private String productDescription;
+	private int productPrice;
+	private int productStock;
+	private String productImage;
 	
 	public int getProductNumber() {
-		return product_number;
+		return productNumber;
 	}
 
 	public String getProductName() {
-		return product_name;
+		return productName;
 	}
 	
 	public String getProductDescription() {
-		return product_description;
+		return productDescription;
 	}
 	
 	public int getProductPrice() {
-		return product_price;
+		return productPrice;
 	}
 	
 	public int getProductStock() {
-		return product_stock;
+		return productStock;
 	}
 	
 	public String getProductImage() {
-		return product_image;
+		return productImage;
 	}
 	
-	public void setProductNumber(int product_number) {
-		this.product_number = product_number;
+	public void setProductNumber(int productNumber) {
+		this.productNumber = productNumber;
 	}
 	
-	public void setProductName(String product_name) {
-		this.product_name = product_name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	
-	public void setProductDescription(String product_description) {
-		this.product_description = product_description;
+	public void setProductDescription(String productDescription) {
+		this.productDescription = productDescription;
 	}
 	
-	public void setProductPrice(int product_price) {
-		this.product_price = product_price;
+	public void setProductPrice(int productPrice) {
+		this.productPrice = productPrice;
 	}
 	
-	public void setProductStock(int product_stock) {
-		this.product_stock = product_stock;
+	public void setProductStock(int productStock) {
+		this.productStock = productStock;
 	}
 	
-	public void setProductImage(String product_image) {
-		this.product_image = product_image;
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 
 }

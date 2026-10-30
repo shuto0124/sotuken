@@ -2,20 +2,20 @@ package bean;
 
 public class OrderDetais implements java.io.Serializable {
 	
-	private int order_detail_number;
+	private int orderDetailNumber;
 	//注文明細から注文を参照することはないのでOrdersbeanをもたせない
-	private int order_number;
+	private int orderNumber;
 	private Products products;
-	private int order_quantity;
-	private int order_subtotal;
+	private int orderQuantity;
+	private int orderSubtotal;
 	
 	
 	public int getOrderDetailNumber() {
-		return order_detail_number;
+		return orderDetailNumber;
 	}
 	
 	public int getOrderNumber() {
-		return order_number;
+		return orderNumber;
 	}
 
 	public Products getProducts() {
@@ -23,31 +23,31 @@ public class OrderDetais implements java.io.Serializable {
 	}
 	
 	public int getOrderQuantity() {
-		return order_quantity;
+		return orderQuantity;
 	}
 	
 	public int getOrderSubtotal() {
-		return order_subtotal;
+		return orderSubtotal;
 	}
 	
-	public void setOrderDetailNumber(int  order_detail_number) {
-		this.order_detail_number = order_detail_number;
+	public void setOrderDetailNumber(int  orderDetailNumber) {
+		this.orderDetailNumber = orderDetailNumber;
 	}
 	
-	public void setOrderNumber(int order_number) {
-		this.order_number = order_number;
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 	
 	public void setProducts(Products products) {
 		this.products = products;
 	}
 	
-	public void setOrderQuantity(int order_quantity) {
-		this.order_quantity = order_quantity;
+	public void setOrderQuantity(int orderQuantity) {
+		this.orderQuantity = orderQuantity;
 	}
 	
-	public void setOrderSubtotal(int order_subtotal) {
-		this.order_subtotal = order_subtotal;
+	public void setOrderSubtotal(int orderSubtotal) {
+		this.orderSubtotal = orderSubtotal;
 	}
 
 }

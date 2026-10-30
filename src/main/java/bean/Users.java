@@ -2,18 +2,18 @@ package bean;
 
 public class Users implements java.io.Serializable {
 	
-	private int user_number;
-	private String user_name;
+	private int userNumber;
+	private String userName;
 	private String password;
-	private String account_status;
+	private String accountStatus;
 	private Groups groups;
 	
 	public int getUserNumber() {
-		return user_number;
+		return userNumber;
 	}
 
 	public String getUserName() {
-		return user_name;
+		return userName;
 	}
 	
 	public String getPassword() {
@@ -21,27 +21,27 @@ public class Users implements java.io.Serializable {
 	}
 	
 	public String getAccountStatus() {
-		return account_status;
+		return accountStatus;
 	}
 	
 	public Groups getGroups() {
 		return groups;
 	}
 	
-	public void setUserNumber(int user_number) {
-		this.user_number = user_number;
+	public void setUserNumber(int userNumber) {
+		this.userNumber = userNumber;
 	}
 	
-	public void setUserName(String user_name) {
-		this.user_name = user_name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
-	public void setAccountStatus(String account_status) {
-		this.account_status = account_status;
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 	
 	public void setGroups(Groups groups) {

@@ -2,22 +2,22 @@ package bean;
 
 public class Groups implements java.io.Serializable {
 	
-	private int group_number;
-	private int member_count;
+	private int groupNumber;
+	private int memberCount;
 	
 	public int getGroupNumber() {
-		return group_number;
+		return groupNumber;
 	}
 
 	public int getMemberCount() {
-		return member_count;
+		return memberCount;
 	}
 	
-	public void setGroupNumber(int group_number) {
-		this.group_number = group_number;
+	public void setGroupNumber(int groupNumber) {
+		this.groupNumber = groupNumber;
 	}
 	
-	public void setMemberCount(int member_count) {
-		this.member_count = member_count;
+	public void setMemberCount(int memberCount) {
+		this.memberCount = memberCount;
 	}
 }

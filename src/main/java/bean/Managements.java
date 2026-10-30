@@ -4,41 +4,41 @@ import java.time.LocalTime;
 
 public class Managements implements java.io.Serializable {
 	
-	private int setting_number;
-	private LocalTime system_start_time;
-	private LocalTime system_end_time;
-	private int reservation_duration;
+	private int settingNumber;
+	private LocalTime systemStartTime;
+	private LocalTime systemEndTime;
+	private int reservationDuration;
 	
 	public int getSettingNumber() {
-		return setting_number;
+		return settingNumber;
 	}
 
 	public LocalTime getSystemStartTime() {
-		return system_start_time;
+		return systemStartTime;
 	}
 	
 	public LocalTime getSystemEndTime() {
-		return system_end_time;
+		return systemEndTime;
 	}
 	
 	public int getReservationDuration() {
-		return reservation_duration;
+		return reservationDuration;
 	}
 	
-	public void setSettingNumber(int setting_number) {
-		this.setting_number = setting_number;
+	public void setSettingNumber(int settingNumber) {
+		this.settingNumber = settingNumber;
 	}
 	
-	public void setSystemStartTime(LocalTime system_start_time) {
-		this.system_start_time = system_start_time;
+	public void setSystemStartTime(LocalTime systemStartTime) {
+		this.systemStartTime = systemStartTime;
 	}
 	
-	public void setSystemEndTime(LocalTime system_end_time) {
-		this.system_end_time = system_end_time;
+	public void setSystemEndTime(LocalTime systemEndTime) {
+		this.systemEndTime = systemEndTime;
 	}
 	
-	public void setReservationDuration(int reservation_duration) {
-		this.reservation_duration = reservation_duration;
+	public void setReservationDuration(int reservationDuration) {
+		this.reservationDuration = reservationDuration;
 	}
 	
 }
