@@ -34,6 +34,39 @@ public class TablesDao extends Dao {
 	//	詳細取得
 	public Tables findByNumber(int tableNumber) throws Exception {
 		Tables table = null;
-		String sql = "";
+		String sql = "select table_number, table_type, table_status from Tables where table_number = ?";
+		
+		try (Connection con = getConnection();
+			 PreparedStatement st = con.prepareStatement(sql)) {
+			
+			st.setInt(1, tableNumber);
+			
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					table = new Tables();
+					
+					table.setTableNumber(rs.getInt("table_number"));
+					table.setTableType(rs.getString("table_type"));
+					table.setTableStatus(rs.getString("table_status"));
+				}
+			}
+		}
+		
+		return table;
+	}
+	
+	//	更新
+	public boolean updateStatus(int tableNumber, String tableStatus) throws Exception {
+		String sql = "update Tables set table_status = ? where table_number = ?";
+		
+		try(Connection con = getConnection();
+			PreparedStatement st = con.prepareStatement(sql)) {
+			
+			st.setString(1, tableStatus);
+			st.setInt(2, tableNumber);
+			
+			int line = 	st.executeUpdate();
+			return line > 0; 
+		}
 	}
 }
