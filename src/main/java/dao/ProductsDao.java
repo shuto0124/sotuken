@@ -10,10 +10,11 @@ import bean.Products;
 
 public class ProductsDao extends Dao {
 	
-	//	一覧取得
+	//	全件取得
 	public List<Products> findAll() throws Exception {
 		List<Products> list = new ArrayList<>();
 		String sql = "select product_number, product_name, product_image, product_price from Products order by product_number";
+		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql);
 			 ResultSet rs = st.executeQuery()) {
@@ -37,6 +38,7 @@ public class ProductsDao extends Dao {
 	public Products findByNumber(int productNumber) throws Exception{
 		Products product = null;
 		String sql = "select product_number, product_name, product_image, product_description, product_price from Products where product_number = ?";
+		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
 			
