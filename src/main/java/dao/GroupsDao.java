@@ -93,7 +93,7 @@ public class GroupsDao extends Dao {
 		return list;
 	}
 	
-	public Groups creategroup() throws Exception {
+	public Groups createGroup() throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		int count = 0;
@@ -119,8 +119,8 @@ public class GroupsDao extends Dao {
 					statement = connection.prepareStatement(
 				"insert into groups(group_number,member_count) values(?,?)");
 					
-					statement.setInt(1, groups.getGroupNumber());
-					statement.setInt(2, groups.getMemberCount());
+					statement.setInt(1, groupNumber);
+					statement.setInt(2, 1);
 					count = statement.executeUpdate();
 				}
 			} catch (Exception e) {
@@ -194,16 +194,46 @@ public class GroupsDao extends Dao {
 	} 
 	
 	
+	public void removeGroups() throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			statement = connection.prepareStatement("delete from groups where member_count=?");
+			statement.setInt(1, 0);
+
+			statement.executeUpdate();
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+	} 
 	
-	public String join(Users users,int groupNumber) throws Exception {
+	
+	public String joinGroup(Users users,int groupNumber) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		int count = 0;
 		
 		try {
 			Groups groups = get(groupNumber);
-			int groupNomber = groups.getGroupNumber();
 			if (groups != null) {
+				int groupNomber = groups.getGroupNumber();
 				if (groups.getMemberCount() <= 4) {
 					statement = connection.prepareStatement(
 							"update users set group_number=? where user_number=?");
@@ -212,11 +242,18 @@ public class GroupsDao extends Dao {
 					
 					count = statement.executeUpdate();
 					boolean sync = syncGroups(groupNomber);
+					
 					if (sync==true) {
-						System.out.print("同期成功");
-						//削除処理を追加
+						System.out.print("参加同期成功");
+						sync = syncGroups(users.getGroups().getGroupNumber());
+						if (sync == true) {
+							System.out.print("退出同期成功");
+							removeGroups();
+						} else {
+							System.out.print("退出同期エラー");
+						}
 					} else {
-						System.out.print("同期エラー");
+						System.out.print("参加同期エラー");
 					}
 				} else {
 					return "満員";
@@ -249,5 +286,25 @@ public class GroupsDao extends Dao {
 		} else {
 			return "エラー";
 		}
+	}
+	
+	
+	
+	public Boolean exitGroup(Users users) throws Exception {
+		try {
+			Groups group = createGroup();
+				if (group != null) {
+					String join = joinGroup(users,group.getGroupNumber());
+					if (join=="完了") {
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					return false;
+				}
+		} catch (Exception e) {
+			throw e;
+		} 
 	} 
-} 
+}
