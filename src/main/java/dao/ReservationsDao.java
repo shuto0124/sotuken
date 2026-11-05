@@ -157,7 +157,38 @@ public class ReservationsDao extends Dao {
 		return rv;
 	}
 	
+//  managementがないと進められないので保留　　
 	
+//	public boolean timeSet() throws Exception {
+//		Connection connection = getConnection();
+//		PreparedStatement statement = null;
+//		ResultSet rSet = null;
+//		try {
+//			System.out.print("");
+//			}	
+//		} catch (Exception e) {
+//			throw e;
+//		} finally {
+//			if (rSet != null) {
+//			    rSet.close();
+//			}
+//			if (statement != null) {
+//				try {
+//					statement.close();
+//				} catch (SQLException sqle) {
+//					throw sqle;
+//				}
+//			}
+//			if (connection != null) {
+//				try {
+//					connection.close();
+//				} catch (SQLException sqle) {
+//					throw sqle;
+//				}
+//			}
+//		}	
+//		return list;
+//	}
 	
 	
 	
