@@ -115,7 +115,6 @@ public class GroupsDao extends Dao {
 					groups.setGroupNumber(groupNumber);
 					groups.setMemberCount(1);
 					
-					rSet = null;
 					statement = connection.prepareStatement(
 				"insert into groups(group_number,member_count) values(?,?)");
 					
