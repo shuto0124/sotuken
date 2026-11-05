@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Reservations;
 
@@ -24,6 +26,7 @@ public class ReservationsDao extends Dao {
 				rv.setReservationNumber(rSet.getInt("reservation_number"));
 				rv.setGroups(gDao.get(rSet.getInt("group_number")));
 				rv.setTables(tDao.findByNumber(rSet.getInt("table_number")));
+				rv.setTimeLimit(null);
 
 			} else {
 				rv = null;
@@ -49,7 +52,51 @@ public class ReservationsDao extends Dao {
 		return rv;
 	}
 	
-	
+	public List<Reservations> findAll() throws Exception {
+		List<Reservations> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+		try {
+			statement = connection.prepareStatement("select * from reservations");
+			
+			rSet = statement.executeQuery();
+			
+			Reservations rv = new Reservations();
+			GroupsDao gDao = new GroupsDao();
+			TablesDao tDao = new TablesDao();
+			
+			while(rSet.next()) {
+				rv.setReservationNumber(rSet.getInt("reservation_number"));
+				rv.setGroups(gDao.get(rSet.getInt("group_number")));
+				rv.setTables(tDao.findByNumber(rSet.getInt("table_number")));
+				rv.setTimeLimit(null);
+
+				list.add(rv);
+			}	
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (rSet != null) {
+			    rSet.close();
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}	
+		return list;
+	}
 	
 	
 	
