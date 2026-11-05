@@ -23,7 +23,7 @@ public class ReservationsDao extends Dao {
 			if (rSet.next()) {
 				rv.setReservationNumber(rSet.getInt("reservation_number"));
 				rv.setGroups(gDao.get(rSet.getInt("group_number")));
-				rv.setTables(tDao.findByNumber(rSer.getInt("table_number")));
+				rv.setTables(tDao.findByNumber(rSet.getInt("table_number")));
 
 			} else {
 				rv = null;
