@@ -108,7 +108,7 @@ public class ReservationsDao extends Dao {
 			try {
 				statement = connection.prepareStatement("select * from reservations where table_number=?");
 				statement.setInt(1, tableNumber);
-				ResultSet rSet = statement.executeQuery();
+				ResultSet rSet = statement.executeQuery(); 
 				GroupsDao gDao = new GroupsDao();
 				TablesDao tDao = new TablesDao();
 				
