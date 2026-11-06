@@ -13,7 +13,7 @@ public class TablesDao extends Dao {
 	//	全件取得
 	public List<Tables> findAll() throws Exception {
 		List<Tables> list = new ArrayList<>();
-		String sql = "select table_number, table_type, table_status from Tables order by table_number";
+		String sql = "SELECT table_number, table_type, table_status FROM TABLES ORDER BY table_number";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql);
@@ -34,7 +34,7 @@ public class TablesDao extends Dao {
 	//	詳細取得
 	public Tables findByNumber(int tableNumber) throws Exception {
 		Tables table = null;
-		String sql = "select table_number, table_type, table_status from Tables where table_number = ?";
+		String sql = "SELECT table_number, table_type, table_status FROM TABLES WHERE table_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
@@ -57,7 +57,7 @@ public class TablesDao extends Dao {
 	
 	//	更新
 	public boolean updateStatus(int tableNumber, String tableStatus) throws Exception {
-		String sql = "update Tables set table_status = ? where table_number = ?";
+		String sql = "UPDATE TABLES SET table_status = ? WHERE table_number = ?";
 		
 		try(Connection con = getConnection();
 			PreparedStatement st = con.prepareStatement(sql)) {
