@@ -99,6 +99,49 @@ public class ReservationsDao extends Dao {
 	}
 	
 	
+	//テーブル番号から取得
+		public Reservations tfind(int tableNumber) throws Exception {
+			Reservations rv = new Reservations();
+			Connection connection = getConnection();
+			PreparedStatement statement = null;
+			
+			try {
+				statement = connection.prepareStatement("select * from reservations where table_number=?");
+				statement.setInt(1, tableNumber);
+				ResultSet rSet = statement.executeQuery();
+				GroupsDao gDao = new GroupsDao();
+				TablesDao tDao = new TablesDao();
+				
+				if (rSet.next()) {
+					rv.setReservationNumber(rSet.getInt("reservation_number"));
+					rv.setGroups(gDao.get(rSet.getInt("group_number")));
+					rv.setTables(tDao.findByNumber(tableNumber));
+					rv.setTimeLimit((LocalTime) rSet.getObject("time_limit"));
+				} else {
+					rv = null;
+				}
+			} catch (Exception e) {
+				throw e;
+			} finally {
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
+				}
+			}  
+			return rv;
+		}
+	
+	
 	//全件取得
 	public List<Reservations> findAll() throws Exception {
 		List<Reservations> list = new ArrayList<>();
