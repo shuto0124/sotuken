@@ -12,7 +12,7 @@ public class CartsDao extends Dao {
 	public Carts findByUserNumber(int userNumber) throws Exception {
 		
 		Carts cart = null;
-		String sql = "select cart_number, user_number, cart_total from Carts where user_number = ?";
+		String sql = "SELECT cart_number, user_number, cart_total FROM CARTS WHERE user_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
@@ -35,11 +35,51 @@ public class CartsDao extends Dao {
 	
 	//	個人番号に対してカートを作成
 	public boolean createCart(int userNumber) throws Exception {
-		String sql = "insert into Carts(user_number, cart_total) values(?, 0)";
+		String sql = "INSERT INTO CARTS(user_number, cart_total) VALUES(?, 0)";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
 			
+			st.setInt(1, userNumber);
+			
+			int line = st.executeUpdate();
+			return line > 0;
+		}
+	}
+	
+	//	カートが存在していれば取得し、なかったら自動で作成
+	public Carts getOrCreateCart(int userNumber) throws Exception {
+		Carts cart = findByUserNumber(userNumber);
+		
+		if (cart == null) {
+			createCart(userNumber);
+			cart = findByUserNumber(userNumber);
+		}
+		
+		return cart;
+	}
+	
+	//	カート明細と商品から小計を計算し、合計を更新する
+	public boolean updateTotal(int cartNumber) throws Exception {
+		String sql = """
+						UPDATE CARTS 
+					    SET cart_total = COALESCE((
+					        SELECT SUM(p.product_price * cd.quantity) 
+					        FROM CARTDETAILS cd 
+					        JOIN PRODUCTS p ON cd.product_number = p.product_number 
+					        WHERE cd.cart_number = ? 
+					    ), 0) 
+					    WHERE cart_number = ?
+					""";
+		
+		try (Connection con = getConnection();
+			 PreparedStatement st = con.prepareStatement(sql)) {
+			
+			st.setInt(1, cartNumber);
+			st.setInt(2, cartNumber);
+			
+			int line = st.executeUpdate();
+			return line > 0;
 		}
 	}
 }

@@ -13,7 +13,7 @@ public class ProductsDao extends Dao {
 	//	全件取得
 	public List<Products> findAll() throws Exception {
 		List<Products> list = new ArrayList<>();
-		String sql = "select product_number, product_name, product_image, product_price from Products order by product_number";
+		String sql = "SELECT product_number, product_name, product_image, product_price FROM PRODUCTS ORDER BY product_number";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql);
@@ -37,7 +37,7 @@ public class ProductsDao extends Dao {
 	//	詳細取得
 	public Products findByNumber(int productNumber) throws Exception{
 		Products product = null;
-		String sql = "select product_number, product_name, product_image, product_description, product_price from Products where product_number = ?";
+		String sql = "SELECT product_number, product_name, product_image, product_description, product_price FROM PRODUCTS WHERE product_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
@@ -69,7 +69,7 @@ public class ProductsDao extends Dao {
 			Products old = findByNumber(products.getProductNumber());
 			
 			if (old == null) {
-				String sql = "insert into Products(product_number, product_name, product_description, product_price, product_stock, product_image) values(?, ?, ?, ?, ?, ?)";
+				String sql = "INSERT INTO PRODUCTS(product_number, product_name, product_description, product_price, product_stock, product_image) VALUES(?, ?, ?, ?, ?, ?)";
 				
 				try (PreparedStatement st = con.prepareStatement(sql)) {
 					st.setInt(1, products.getProductNumber());
@@ -82,7 +82,7 @@ public class ProductsDao extends Dao {
 					count = st.executeUpdate();
 				}
 			} else {
-				String sql = "update Products set product_number = ?, product_name = ?, product_description = ?, product_price = ?, product_stock = ?, product_image = ?";
+				String sql = "UPDATE PRODUCTS SET product_number = ?, product_name = ?, product_description = ?, product_price = ?, product_stock = ?, product_image = ?";
 				
 				try (PreparedStatement st = con.prepareStatement(sql)) {
 					st.setInt(1, products.getProductNumber());
@@ -102,7 +102,7 @@ public class ProductsDao extends Dao {
 	
 	//	削除
 	public boolean delete(Products products) throws Exception {
-		String sql = "delete from Products where product_number = ?";
+		String sql = "DELETE FROM PRODUCTS WHERE product_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
