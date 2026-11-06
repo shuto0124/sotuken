@@ -12,7 +12,7 @@ import bean.Groups;
 import bean.Users;
 
 public class GroupsDao extends Dao {
-	//検索取得
+	//グループ番号から取得
 	public Groups get(int groupNumber) throws Exception {
 		Groups groups = new Groups();
 		Connection connection = getConnection();
@@ -92,7 +92,7 @@ public class GroupsDao extends Dao {
 	
 		return list;
 	}
-	
+	//グループを作成
 	public Groups createGroup() throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -145,7 +145,7 @@ public class GroupsDao extends Dao {
 			
 		return groups;
 	}
-	
+	//グループの人数の更新
 	public Boolean syncGroups(int groupNomber) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -192,7 +192,7 @@ public class GroupsDao extends Dao {
 		}
 	} 
 	
-	
+	//０人のグループの削除
 	public void removeGroups() throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -223,7 +223,7 @@ public class GroupsDao extends Dao {
 		} 
 	} 
 	
-	
+	//グループに参加　（人数の更新、０人のグループの削除込み）
 	public String joinGroup(Users users,int groupNumber) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -288,7 +288,7 @@ public class GroupsDao extends Dao {
 	}
 	
 	
-	
+	//グループから抜ける
 	public Boolean exitGroup(Users users) throws Exception {
 		try {
 			Groups group = createGroup();

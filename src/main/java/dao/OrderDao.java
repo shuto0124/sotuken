@@ -12,6 +12,7 @@ import bean.Orders;
 import bean.Users;
 
 public class OrderDao extends Dao {
+	//注文番号で取得
 	public Orders get(int order_number) throws Exception {
 		Orders orders = new Orders();
 		Connection connection = getConnection();
@@ -53,7 +54,7 @@ public class OrderDao extends Dao {
 		}  
 		return orders;
 	}
-	
+	//全件取得
 	public List<Orders> findall() throws Exception {
 		List<Orders> list = new ArrayList<>();
 		Connection connection = getConnection();
@@ -99,7 +100,7 @@ public class OrderDao extends Dao {
 	
 		return list;
 	}
-	
+	//注文の作成
 	public Orders createOrder(Users users) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;

@@ -14,6 +14,7 @@ import bean.Reservations;
 import bean.Tables;
 
 public class ReservationsDao extends Dao {
+	//予約番号から取得
 	public Reservations get(int reservation_number) throws Exception {
 		Reservations rv = new Reservations();
 		Connection connection = getConnection();
@@ -55,7 +56,7 @@ public class ReservationsDao extends Dao {
 		}  
 		return rv;
 	}
-	
+	//グループ番号から取得
 	public Reservations gfind(int groupNumber) throws Exception {
 		Reservations rv = new Reservations();
 		Connection connection = getConnection();
@@ -98,7 +99,7 @@ public class ReservationsDao extends Dao {
 	}
 	
 	
-	
+	//全件取得
 	public List<Reservations> findAll() throws Exception {
 		List<Reservations> list = new ArrayList<>();
 		Connection connection = getConnection();
@@ -144,7 +145,7 @@ public class ReservationsDao extends Dao {
 		}	
 		return list;
 	}
-	
+	//予約の作成
 	public Reservations createReservations(Groups groups,Tables tables) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -202,6 +203,8 @@ public class ReservationsDao extends Dao {
 	}
 	
 //  managementがないと進められないので保留　　
+	
+//時間の設定
 	
 //	public boolean timeSet() throws Exception {
 //		Connection connection = getConnection();
