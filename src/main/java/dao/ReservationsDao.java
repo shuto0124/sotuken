@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,7 +30,7 @@ public class ReservationsDao extends Dao {
 				rv.setReservationNumber(rSet.getInt("reservation_number"));
 				rv.setGroups(gDao.get(rSet.getInt("group_number")));
 				rv.setTables(tDao.findByNumber(rSet.getInt("table_number")));
-				rv.setTimeLimit(null);
+				rv.setTimeLimit((LocalTime) rSet.getObject("time_limit"));
 
 			} else {
 				rv = null;
@@ -55,6 +56,49 @@ public class ReservationsDao extends Dao {
 		return rv;
 	}
 	
+	public Reservations gfind(int groupNumber) throws Exception {
+		Reservations rv = new Reservations();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			statement = connection.prepareStatement("select * from reservations where group_number=?");
+			statement.setInt(1, groupNumber);
+			ResultSet rSet = statement.executeQuery();
+			GroupsDao gDao = new GroupsDao();
+			TablesDao tDao = new TablesDao();
+			
+			if (rSet.next()) {
+				rv.setReservationNumber(rSet.getInt("reservation_number"));
+				rv.setGroups(gDao.get(groupNumber));
+				rv.setTables(tDao.findByNumber(rSet.getInt("table_number")));
+				rv.setTimeLimit((LocalTime) rSet.getObject("time_limit"));
+			} else {
+				rv = null;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}  
+		return rv;
+	}
+	
+	
+	
 	public List<Reservations> findAll() throws Exception {
 		List<Reservations> list = new ArrayList<>();
 		Connection connection = getConnection();
@@ -73,7 +117,7 @@ public class ReservationsDao extends Dao {
 				rv.setReservationNumber(rSet.getInt("reservation_number"));
 				rv.setGroups(gDao.get(rSet.getInt("group_number")));
 				rv.setTables(tDao.findByNumber(rSet.getInt("table_number")));
-				rv.setTimeLimit(null);
+				rv.setTimeLimit((LocalTime) rSet.getObject("time_limit"));
 				
 				list.add(rv);
 			}	
