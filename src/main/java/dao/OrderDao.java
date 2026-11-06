@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import bean.Groups;
 import bean.Orders;
 import bean.Users;
 
@@ -106,10 +105,8 @@ public class OrderDao extends Dao {
 		PreparedStatement statement = null;
 		int count = 0;
 		Orders orders = new Orders();
-		Groups groups = new Groups();
-		UsersDao uDao = new UsersDao();
 		ReservationsDao rDao = new ReservationsDao();
-		GroupsDao gDao = new GroupsDao(); 
+
 		
 		do {
 			Random random = new Random();
