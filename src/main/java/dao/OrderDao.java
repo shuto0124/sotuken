@@ -163,4 +163,82 @@ public class OrderDao extends Dao {
 		return orders;
 	}
 	
+	//注文の合計金額
+	public int total(int orderNumber) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+		int totalAmount = 0;
+		try {
+			statement = connection.prepareStatement("select order_subtotal from orderdetails where order_number=?");
+			statement.setInt(1, orderNumber);
+			rSet = statement.executeQuery();
+			while(rSet.next()) {
+				totalAmount += rSet.getInt("order_subtotal");
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (rSet != null) {
+			    rSet.close();
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return totalAmount;
+	}
+	
+	
+	//支払状況の更新 (変更する注文の番号,更新後の状況)
+	public boolean updatePaymentStatus(int orderNumber,String status) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		try {
+			statement = connection.prepareStatement(
+					"update orders set payment_status=? where order_number=?");
+					statement.setString(1, status);
+					statement.setInt(2, orderNumber);
+					
+					count = statement.executeUpdate();
+					
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
