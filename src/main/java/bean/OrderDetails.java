@@ -1,6 +1,6 @@
 package bean;
 
-public class OrderDetais implements java.io.Serializable {
+public class OrderDetails implements java.io.Serializable {
 	
 	private int orderDetailNumber;
 	//注文明細から注文を参照することはないのでOrdersbeanをもたせない
