@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Random;
 
 import bean.OrderDetails;
-import bean.Orders;
+import bean.Products;
 import bean.Users;
 
 
@@ -54,13 +54,13 @@ public class OrderDetailsDao extends Dao {
 		return oD;
 	}
 	
-	public Orders createOD(Users users) throws Exception {
+	public OrderDetails createOD(Users users,int productNumber,int orderQuantity) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		int count = 0;
 		OrderDetails oD = new OrderDetails();
-		ReservationsDao rDao = new ReservationsDao();
 		OrdersDao oDao = new  OrdersDao();
+		ProductsDao pDao = new ProductsDao();
 
 		do {
 			Random random = new Random();
@@ -75,20 +75,22 @@ public class OrderDetailsDao extends Dao {
 					System.out.print("ループ");
 				} else { 
 					statement.close();
+					Products products = pDao.findByNumber(productNumber);
+					
 					oD.setOrderDetailNumber(orderDetailNumber);
-					oD.setOrderNumber(users.getUserNumber());
-					oD.setReservations(rDao.gfind(users.getGroups().getGroupNumber()));
-					oD.setTotalAmount(0);
-					oD.setPaymentStatus(null);
+					oD.setOrderNumber(oDao.uGet(users.getUserNumber()).getOrderNumber());
+					oD.setProducts(products);
+					oD.setOrderQuantity(orderQuantity);
+					oD.setOrderSubtotal(products.getProductPrice() * orderQuantity);
 					
 					statement = connection.prepareStatement(
-				"insert into Orders(order_number,user_number,reservation_number,total_amount,payment_status) values(?,?,?,?,?)");
+				"insert into orderdetails(order_detail_number,order_number,product_number,order_quantity,order_subtotal) values(?,?,?,?,?)");
 					
-					statement.setInt(1, orderNumber);
-					statement.setInt(2, users.getUserNumber());
-					statement.setInt(3, orders.getReservations().getReservationNumber());
-					statement.setInt(4, orders.getTotalAmount());
-					statement.setString(5, null);
+					statement.setInt(1, oD.getOrderDetailNumber());
+					statement.setInt(2, oD.getOrderNumber());
+					statement.setInt(3, oD.getProducts().getProductNumber());
+					statement.setInt(4, oD.getOrderQuantity());
+					statement.setInt(5, oD.getOrderSubtotal());
 					count = statement.executeUpdate();
 				}
 			} catch (Exception e) {
@@ -112,7 +114,7 @@ public class OrderDetailsDao extends Dao {
 			} 
 		} while (count > 0); 
 			
-		return orders;
+		return oD;
 	}
 	
 }
