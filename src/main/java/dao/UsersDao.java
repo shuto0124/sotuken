@@ -126,7 +126,7 @@ public class UsersDao extends Dao {
 				statement.setString(3, users.getPassword());
 				statement.setString(4, users.getAccountStatus());
 				statement.setInt(5, users.getGroups().getGroupNumber());
-			//存在する　更新
+			//存在する 更新
 			} else {
 				statement = connection.prepareStatement(
 						"update users set user_name=?, password=?, account_status=?, group_number=? where user_number=?");
@@ -165,5 +165,57 @@ public class UsersDao extends Dao {
 	} 
 	
 
-	//削除　追加予定
+	//削除　途中
+	
+	public boolean deleteUser(int userNumber) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		UsersDao uDao = new UsersDao();
+		try {
+			statement = connection.prepareStatement("select account_status from users where user_number=?");
+			statement.setInt(1, userNumber);
+			ResultSet rSet = statement.executeQuery();
+			if (rSet != null) {
+				statement.close();
+				String status = rSet.getString("account_status");
+				if (status != "削除済み") {
+					Users users = uDao.get(userNumber);
+					users.setAccountStatus("削除済み");
+					statement = connection.prepareStatement(
+							"update users set account_status=? where user_number=?");
+					statement.setString(1, "削除済み");
+					statement.setInt(2, users.getUserNumber());
+				} else {
+					//ここから  既に削除済みだった場合の処理
+				}
+			} else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
 }
