@@ -297,7 +297,7 @@ public class OrdersDao extends Dao {
 					"delete from order_details where order_number=?");
 			statement.setInt(1, orderNumber);
 			count = statement.executeUpdate();
-			if (count >= 1) {
+			if (count > 0) {
 				count = 0;
 				statement.close();
 				statement = connection.prepareStatement(
