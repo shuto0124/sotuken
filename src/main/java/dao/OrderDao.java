@@ -54,6 +54,52 @@ public class OrderDao extends Dao {
 		}  
 		return orders;
 	}
+	
+	
+	//個人番号で取得
+		public Orders uGet(int user_number) throws Exception {
+			Orders orders = new Orders();
+			Connection connection = getConnection();
+			PreparedStatement statement = null;
+			
+			try {
+				statement = connection.prepareStatement("select * from orders where user_number=?");
+				statement.setInt(1, user_number);
+				ResultSet rSet = statement.executeQuery();
+				UsersDao uDao = new UsersDao();
+				ReservationsDao rDao = new ReservationsDao();
+				
+				if (rSet.next()) {
+					orders.setOrderNumber(rSet.getInt("order_number"));
+					orders.setUsers(uDao.get(rSet.getInt("user_number")));
+					orders.setReservations(rDao.get(rSet.getInt("reservation_number")));
+					orders.setTotalAmount(rSet.getInt("total_amount"));
+					orders.setPaymentStatus(rSet.getString("payment_status"));
+				} else {
+					orders = null;
+				}
+			} catch (Exception e) {
+				throw e;
+			} finally {
+				if (statement != null) {
+					try {
+						statement.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
+				}
+				if (connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException sqle) {
+						throw sqle;
+					}
+				}
+			}  
+			return orders;
+		}
+		
+		
 	//全件取得
 	public List<Orders> findall() throws Exception {
 		List<Orders> list = new ArrayList<>();
