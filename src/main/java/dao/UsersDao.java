@@ -104,6 +104,10 @@ public class UsersDao extends Dao {
 		return list;
 	}
 	
+	
+	//-------------------------passwordの保存方法(セキュリティ面)改善が必要
+	
+	
 	//登録更新
 	public boolean save(Users users) throws Exception {
 		Connection connection = getConnection();
@@ -159,5 +163,7 @@ public class UsersDao extends Dao {
 			return false;
 		}
 	} 
+	
+
 	
 }
