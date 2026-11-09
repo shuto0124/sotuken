@@ -11,7 +11,7 @@ import java.util.Random;
 import bean.Orders;
 import bean.Users;
 
-public class OrderDao extends Dao {
+public class OrdersDao extends Dao {
 	//注文番号で取得
 	public Orders get(int order_number) throws Exception {
 		Orders orders = new Orders();
