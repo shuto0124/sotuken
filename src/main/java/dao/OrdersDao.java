@@ -287,4 +287,52 @@ public class OrdersDao extends Dao {
 		}
 	}
 	
+	//削除
+	public boolean delete(int orderNumber) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		try {
+			statement = connection.prepareStatement(
+					"delete from order_details where order_number=?");
+			statement.setInt(1, orderNumber);
+			count = statement.executeUpdate();
+			if (count >= 1) {
+				count = 0;
+				statement.close();
+				statement = connection.prepareStatement(
+						"delete from orders where order_number=?");
+				statement.setInt(1, orderNumber);
+				count = statement.executeUpdate();
+			} else {
+				return false;
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 }
