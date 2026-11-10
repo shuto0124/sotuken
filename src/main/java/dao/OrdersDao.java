@@ -335,4 +335,14 @@ public class OrdersDao extends Dao {
 		}
 	}
 	
+	//カートから注文に移す処理
+	
+	//個人番号を引数で受け取る
+	//Orders createOrder(Users users)
+	//Orders型の戻り値から注文番号を取得
+	//個人番号からカート番号を取得
+	//カート番号が一致するカート明細のリストを取得
+	//1件ずつoDDaoのOrderDetails createOD(int orderNumber,int productNumber,int orderQuantity) 
+	//カートをクリア
+	
 }

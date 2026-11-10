@@ -8,7 +8,6 @@ import java.util.Random;
 
 import bean.OrderDetails;
 import bean.Products;
-import bean.Users;
 
 
 public class OrderDetailsDao extends Dao {
@@ -53,13 +52,16 @@ public class OrderDetailsDao extends Dao {
 		}  
 		return oD;
 	}
+	
+	//注文番号からリスト取得
+	
+	
 	//注文明細の作成
-	public OrderDetails createOD(Users users,int productNumber,int orderQuantity) throws Exception {
+	public OrderDetails createOD(int orderNumber,int productNumber,int orderQuantity) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		int count = 0;
 		OrderDetails oD = new OrderDetails();
-		OrdersDao oDao = new  OrdersDao();
 		ProductsDao pDao = new ProductsDao();
 
 		do {
@@ -78,7 +80,7 @@ public class OrderDetailsDao extends Dao {
 					Products products = pDao.findByNumber(productNumber);
 					
 					oD.setOrderDetailNumber(orderDetailNumber);
-					oD.setOrderNumber(oDao.uGet(users.getUserNumber()).getOrderNumber());
+					oD.setOrderNumber(orderNumber);
 					oD.setProducts(products);
 					oD.setOrderQuantity(orderQuantity);
 					oD.setOrderSubtotal(products.getProductPrice() * orderQuantity);
