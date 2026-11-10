@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import bean.OrderDetails;
@@ -54,6 +56,50 @@ public class OrderDetailsDao extends Dao {
 	}
 	
 	//注文番号からリスト取得
+	public List<OrderDetails> oGetAll(int orderNumber) throws Exception {
+		List<OrderDetails> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+		ProductsDao pDao = new ProductsDao();
+		try {
+			statement = connection.prepareStatement("select * from orderdetails where order_number=?");
+			statement.setInt(1, orderNumber);
+			rSet = statement.executeQuery();
+			
+			while(rSet.next()) {
+				OrderDetails oD = new OrderDetails();
+				oD.setOrderDetailNumber(rSet.getInt("order_detail_number"));
+				oD.setOrderNumber(rSet.getInt("order_number"));
+				oD.setProducts(pDao.findByNumber(rSet.getInt("product_number")));
+				oD.setOrderQuantity(rSet.getInt("order_quantity"));
+				oD.setOrderSubtotal(rSet.getInt("order_subtotal"));
+				
+				list.add(oD);
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (rSet != null) {
+			    rSet.close();
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+		return list;
+	}
 	
 	
 	//注文明細の作成
