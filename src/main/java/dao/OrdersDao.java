@@ -338,6 +338,7 @@ public class OrdersDao extends Dao {
 	//カートから注文に移す処理
 	
 	//個人番号を引数で受け取る
+	//個人番号でusersを取得
 	//Orders createOrder(Users users)
 	//Orders型の戻り値から注文番号を取得
 	//個人番号からカート番号を取得
