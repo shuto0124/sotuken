@@ -245,40 +245,67 @@ public class ReservationsDao extends Dao {
 		return rv;
 	}
 	
-//  managementがないと進められないので保留　　
 	
-//時間の設定
+//時間の設定 これが実行されると現在時間に利用可能時間を足した時間が保存される
+// 11:23;00 に利用可能時間が30分の状態で実行すると 11:53:00 が保存される
+	public boolean timeSet(int reservationNumber) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+		int count = 0;
 	
-//	public boolean timeSet() throws Exception {
-//		Connection connection = getConnection();
-//		PreparedStatement statement = null;
-//		ResultSet rSet = null;
-//		try {
-//			System.out.print("");
-//			}	
-//		} catch (Exception e) {
-//			throw e;
-//		} finally {
-//			if (rSet != null) {
-//			    rSet.close();
-//			}
-//			if (statement != null) {
-//				try {
-//					statement.close();
-//				} catch (SQLException sqle) {
-//					throw sqle;
-//				}
-//			}
-//			if (connection != null) {
-//				try {
-//					connection.close();
-//				} catch (SQLException sqle) {
-//					throw sqle;
-//				}
-//			}
-//		}	
-//		return list;
-//	}
+		try {
+			statement = connection.prepareStatement(
+					"select * from reservations where reservation_number=?");
+			statement.setInt(1, reservationNumber);
+			rSet = statement.executeQuery();
+			if (rSet.next()) {
+				statement.close();
+				ManagementsDao mDao = new ManagementsDao();
+				int reservationDuration = mDao.get().getReservationDuration();
+				
+				LocalTime now = LocalTime.now();
+				LocalTime result = now.plusMinutes(reservationDuration);
+				
+				Reservations rv = get(reservationNumber);
+				rv.setTimeLimit(result);
+				
+				statement = connection.prepareStatement(
+						"update reservations set time_limit=? where reservation_number=?");
+				statement.setTime(1, java.sql.Time.valueOf(rv.getTimeLimit()));
+				statement.setInt(2, reservationNumber);
+				
+				count = statement.executeUpdate();
+
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+} 
 	
 	
 	
