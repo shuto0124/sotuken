@@ -53,7 +53,7 @@ public class OrderDetailsDao extends Dao {
 		}  
 		return oD;
 	}
-	
+	//注文明細の作成
 	public OrderDetails createOD(Users users,int productNumber,int orderQuantity) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
