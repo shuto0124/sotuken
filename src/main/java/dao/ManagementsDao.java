@@ -246,7 +246,7 @@ public class ManagementsDao extends Dao {
 			statement.setTime(2, java.sql.Time.valueOf(manage.getSystemEndTime()));
 			statement.setInt(3, manage.getReservationDuration());
 			statement.setInt(4, manage.getSettingNumber());
-			count = statement.executeUpdate();8
+			count = statement.executeUpdate();
 			
 		} catch (Exception e) {
 			throw e;
