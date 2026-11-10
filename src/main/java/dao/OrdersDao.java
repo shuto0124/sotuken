@@ -287,7 +287,7 @@ public class OrdersDao extends Dao {
 		}
 	}
 	
-	//削除　（明細も込み）
+	//削除（明細も込み）
 	public boolean delete(int orderNumber) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
