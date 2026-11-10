@@ -104,6 +104,55 @@ public class UsersDao extends Dao {
 		return list;
 	}
 	
+	//グループ番号からlist取得
+	public List<Users> gGetAll(int groupNumber) throws Exception {
+		List<Users> list = new ArrayList<>();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		ResultSet rSet = null;
+		try {
+			statement = connection.prepareStatement("select * from users where group_number=?");
+			statement.setInt(1, groupNumber);
+			rSet = statement.executeQuery();
+			
+			GroupsDao groupsDao = new GroupsDao();
+			
+			while(rSet.next()) {
+				Users users = new Users();
+				users.setUserNumber(rSet.getInt("user_number"));
+				users.setUserName(rSet.getString("user_name"));
+				users.setPassword(rSet.getString("password"));
+				users.setAccountStatus(rSet.getString("account_status"));
+				  
+				users.setGroups(groupsDao.get(rSet.getInt("group_number")));
+				
+				list.add(users);
+			}
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (rSet != null) {
+			    rSet.close();
+			}
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}
+	
+		return list;
+	}
 	
 	//-------------------------passwordの保存方法(セキュリティ面)改善が必要
 	
