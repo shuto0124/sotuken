@@ -165,7 +165,7 @@ public class UsersDao extends Dao {
 	} 
 	
 
-	//削除　途中
+	//削除 
 	
 	public boolean deleteUser(int userNumber) throws Exception {
 		Connection connection = getConnection();
@@ -178,16 +178,18 @@ public class UsersDao extends Dao {
 			ResultSet rSet = statement.executeQuery();
 			if (rSet != null) {
 				statement.close();
+				Users users = uDao.get(userNumber);
 				String status = rSet.getString("account_status");
 				if (status != "削除済み") {
-					Users users = uDao.get(userNumber);
 					users.setAccountStatus("削除済み");
 					statement = connection.prepareStatement(
 							"update users set account_status=? where user_number=?");
 					statement.setString(1, "削除済み");
 					statement.setInt(2, users.getUserNumber());
 				} else {
-					//ここから  既に削除済みだった場合の処理
+					statement = connection.prepareStatement("delete from users where user_number=?");
+					statement.setInt(1, users.getUserNumber());
+					count = statement.executeUpdate();
 				}
 			} else {
 				return false;
