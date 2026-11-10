@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.time.LocalTime;
 
 import bean.Managements;
 
@@ -99,10 +100,179 @@ public class ManagementsDao extends Dao {
 //時間設定の更新
 	
 	//開始
+	public Boolean setStartTime(LocalTime startTime) throws Exception {
+		Managements manage = new Managements();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		
+		try {
+			statement = connection.prepareStatement("select * from managements where setting_number=?");
+			statement.setInt(1, 1);
+			ResultSet rSet = statement.executeQuery();
+			statement.close();
+			if (!rSet.next()) {
+				createSetting();
+			}
+			
+			manage.setSettingNumber(rSet.getInt("setting_number"));
+			manage.setSystemStartTime(startTime);
+			Time time = rSet.getTime("system_end_time");
+			manage.setSystemEndTime(time != null ? time.toLocalTime() : null);
+			manage.setReservationDuration(rSet.getInt("reservation_duration"));
+			
+			statement = connection.prepareStatement(
+					"update managements set system_start_time=?, system_end_time=?,"
+					+ "reservation_duration=? where setting_number=?");
+			statement.setTime(1, java.sql.Time.valueOf(manage.getSystemStartTime()));
+			statement.setTime(2, java.sql.Time.valueOf(manage.getSystemEndTime()));
+			statement.setInt(3, manage.getReservationDuration());
+			statement.setInt(4, manage.getSettingNumber());
+			count = statement.executeUpdate();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
 	
 	//終了
+	public Boolean setEndTime(LocalTime endTime) throws Exception {
+		Managements manage = new Managements();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		
+		try {
+			statement = connection.prepareStatement("select * from managements where setting_number=?");
+			statement.setInt(1, 1);
+			ResultSet rSet = statement.executeQuery();
+			statement.close();
+			if (!rSet.next()) {
+				createSetting();
+			}
+			
+			manage.setSettingNumber(rSet.getInt("setting_number"));
+			Time time = rSet.getTime("system_start_time");
+			manage.setSystemStartTime(time != null ? time.toLocalTime() : null);
+			manage.setSystemEndTime(endTime);
+			manage.setReservationDuration(rSet.getInt("reservation_duration"));
+			
+			statement = connection.prepareStatement(
+					"update managements set system_start_time=?, system_end_time=?,"
+					+ "reservation_duration=? where setting_number=?");
+			statement.setTime(1, java.sql.Time.valueOf(manage.getSystemStartTime()));
+			statement.setTime(2, java.sql.Time.valueOf(manage.getSystemEndTime()));
+			statement.setInt(3, manage.getReservationDuration());
+			statement.setInt(4, manage.getSettingNumber());
+			count = statement.executeUpdate();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
+	
 	
 	//利用
-	
+	public Boolean setDurationTime(int durationTime) throws Exception {
+		Managements manage = new Managements();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		
+		try {
+			statement = connection.prepareStatement("select * from managements where setting_number=?");
+			statement.setInt(1, 1);
+			ResultSet rSet = statement.executeQuery();
+			statement.close();
+			if (!rSet.next()) {
+				createSetting();
+			}
+			
+			manage.setSettingNumber(rSet.getInt("setting_number"));
+			Time time = rSet.getTime("system_start_time");
+			manage.setSystemStartTime(time != null ? time.toLocalTime() : null);
+			time = rSet.getTime("system_end_time");
+			manage.setSystemEndTime(time != null ? time.toLocalTime() : null);
+			manage.setReservationDuration(durationTime);
+			
+			statement = connection.prepareStatement(
+					"update managements set system_start_time=?, system_end_time=?,"
+					+ "reservation_duration=? where setting_number=?");
+			statement.setTime(1, java.sql.Time.valueOf(manage.getSystemStartTime()));
+			statement.setTime(2, java.sql.Time.valueOf(manage.getSystemEndTime()));
+			statement.setInt(3, manage.getReservationDuration());
+			statement.setInt(4, manage.getSettingNumber());
+			count = statement.executeUpdate();8
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
 	
 }
