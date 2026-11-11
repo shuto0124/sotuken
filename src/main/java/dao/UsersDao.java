@@ -20,7 +20,7 @@ public class UsersDao extends Dao {
 		try {
 			statement = connection.prepareStatement("select * from users where user_number=?,password=?");
 			statement.setInt(1, userNumber);
-			statement.setInt(2, userNumber);
+			statement.setString(2, password);
 			ResultSet rSet = statement.executeQuery();
 			GroupsDao groupsDao = new GroupsDao();
 			
