@@ -57,7 +57,7 @@ public class ReservationsDao extends Dao {
 		return rv;
 	}
 	//グループ番号から取得
-	public Reservations gfind(int groupNumber) throws Exception {
+	public Reservations gFind(int groupNumber) throws Exception {
 		Reservations rv = new Reservations();
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -100,7 +100,7 @@ public class ReservationsDao extends Dao {
 	
 	
 	//テーブル番号から取得
-		public Reservations tfind(int tableNumber) throws Exception {
+		public Reservations tFind(int tableNumber) throws Exception {
 			Reservations rv = new Reservations();
 			Connection connection = getConnection();
 			PreparedStatement statement = null;

@@ -52,7 +52,7 @@ public class GroupsDao extends Dao {
 		return groups;
 	}
 	//全件取得
-	public List<Groups> findall() throws Exception {
+	public List<Groups> findAll() throws Exception {
 		List<Groups> list = new ArrayList<>();
 		Connection connection = getConnection();
 		PreparedStatement statement = null;

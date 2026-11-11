@@ -101,7 +101,7 @@ public class OrdersDao extends Dao {
 		
 		
 	//全件取得
-	public List<Orders> findall() throws Exception {
+	public List<Orders> findAll() throws Exception {
 		List<Orders> list = new ArrayList<>();
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
@@ -170,7 +170,7 @@ public class OrdersDao extends Dao {
 					statement.close();
 					orders.setOrderNumber(orderNumber);;
 					orders.setUsers(users);
-					orders.setReservations(rDao.gfind(users.getGroups().getGroupNumber()));
+					orders.setReservations(rDao.gFind(users.getGroups().getGroupNumber()));
 					orders.setTotalAmount(0);
 					orders.setPaymentStatus(null);
 					

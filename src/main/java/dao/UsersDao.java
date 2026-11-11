@@ -55,7 +55,7 @@ public class UsersDao extends Dao {
 	}
 	
 	//全件取得
-	public List<Users> findall() throws Exception {
+	public List<Users> findAll() throws Exception {
 		List<Users> list = new ArrayList<>();
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
