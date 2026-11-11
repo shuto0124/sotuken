@@ -383,6 +383,7 @@ public class OrdersDao extends Dao {
 				statement = connection.prepareStatement(
 						"delete from orderdetails where order_number=?");
 				statement.setInt(1, orderNumber);
+				statement.execute();
 				System.out.print("トレースエラー 全てのトレースを停止");
 			}
 
