@@ -103,12 +103,11 @@ public class OrderDetailsDao extends Dao {
 	
 	
 	//注文明細の作成
-	public OrderDetails createOD(int orderNumber,int productNumber,int orderQuantity) throws Exception {
+	public OrderDetails createOD(int orderNumber,Products products,int orderQuantity) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		int count = 0;
 		OrderDetails oD = new OrderDetails();
-		ProductsDao pDao = new ProductsDao();
 
 		do {
 			Random random = new Random();
@@ -123,7 +122,6 @@ public class OrderDetailsDao extends Dao {
 					System.out.print("ループ");
 				} else { 
 					statement.close();
-					Products products = pDao.findByNumber(productNumber);
 					
 					oD.setOrderDetailNumber(orderDetailNumber);
 					oD.setOrderNumber(orderNumber);

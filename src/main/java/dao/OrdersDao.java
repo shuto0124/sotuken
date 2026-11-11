@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import bean.CartDetails;
+import bean.OrderDetails;
 import bean.Orders;
+import bean.Products;
 import bean.Users;
 
 public class OrdersDao extends Dao {
@@ -349,12 +352,64 @@ public class OrdersDao extends Dao {
 	}
 	
 	//カートから注文に移す処理
+	public boolean torace(int userNumber) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		List<CartDetails> list = new ArrayList<>();
+		boolean check = true;
+		try {
+			UsersDao uDao = new UsersDao();
+			Users users = uDao.get(userNumber);
+			Orders order = createOrder(users);
+			int orderNumber = order.getOrderNumber();
+			CartsDao cDao = new CartsDao();
+			int cartNumber = cDao.findByUserNumber(userNumber).getCartNumber();
+			// FIXME ここ
+			list = null;//ここにcartdetailsのカート番号から取得したものを保存
+			for (CartDetails cD : list) {
+				Products products = cD.getProducts();
+				int orderQuantity = cD.getQuantity();
+				
+				OrderDetailsDao oDDao = new OrderDetailsDao();
+				OrderDetails oD = oDDao.createOD(orderNumber, products, orderQuantity);
+				
+				if (oD == null) {
+					check = false;
+				}
+			}
+			if (check == true) {
+				//カートをクリアする処理
+			} else {
+				statement = connection.prepareStatement(
+						"delete from orderdetails where order_number=?");
+				statement.setInt(1, orderNumber);
+				System.out.print("トレースエラー 全てのトレースを停止");
+			}
+
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		return check;
+	}
 	
-	//個人番号を引数で受け取る
-	//個人番号でusersを取得
-	//Orders createOrder(Users users)
-	//Orders型の戻り値から注文番号を取得
-	//個人番号からカート番号を取得
+
+
 	//カート番号が一致するカート明細のリストを取得
 	//1件ずつoDDaoのOrderDetails createOD(int orderNumber,int productNumber,int orderQuantity) 
 	//カートをクリア
