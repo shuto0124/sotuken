@@ -210,10 +210,11 @@ public class OrdersDao extends Dao {
 	}
 	
 	//注文の合計金額
-	public int total(int orderNumber) throws Exception {
+	public boolean total(int orderNumber) throws Exception {
 		Connection connection = getConnection();
 		PreparedStatement statement = null;
 		ResultSet rSet = null;
+		int count = 0;
 		int totalAmount = 0;
 		try {
 			statement = connection.prepareStatement("select order_subtotal from orderdetails where order_number=?");
@@ -222,12 +223,18 @@ public class OrdersDao extends Dao {
 			while(rSet.next()) {
 				totalAmount += rSet.getInt("order_subtotal");
 			}
+			statement.close();
+			Orders order = get(orderNumber);
+			order.setTotalAmount(totalAmount);
+			statement = connection.prepareStatement(
+					"update orders set order_subtotal=? where order_number=?");
+			statement.setInt(1, totalAmount);
+			statement.setInt(2, orderNumber);
+			count = statement.executeUpdate();
+			
 		} catch (Exception e) {
 			throw e;
 		} finally {
-			if (rSet != null) {
-			    rSet.close();
-			}
 			if (statement != null) {
 				try {
 					statement.close();
@@ -235,6 +242,7 @@ public class OrdersDao extends Dao {
 					throw sqle;
 				}
 			}
+			
 			if (connection != null) {
 				try {
 					connection.close();
@@ -242,8 +250,13 @@ public class OrdersDao extends Dao {
 					throw sqle;
 				}
 			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
 		}
-		return totalAmount;
 	}
 	
 	
