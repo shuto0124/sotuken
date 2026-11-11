@@ -361,11 +361,11 @@ public class OrdersDao extends Dao {
 			UsersDao uDao = new UsersDao();
 			Users users = uDao.get(userNumber);
 			Orders order = createOrder(users);
+			CartDetailsDao cDDao = new CartDetailsDao();
 			int orderNumber = order.getOrderNumber();
 			CartsDao cDao = new CartsDao();
 			int cartNumber = cDao.findByUserNumber(userNumber).getCartNumber();
-			// FIXME ここ
-			list = null;//ここにcartdetailsのカート番号から取得したものを保存
+			list = cDDao.findByCartNumber(cartNumber);
 			for (CartDetails cD : list) {
 				Products products = cD.getProducts();
 				int orderQuantity = cD.getQuantity();
