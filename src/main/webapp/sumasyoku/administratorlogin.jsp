@@ -35,7 +35,7 @@
                     </div>
                 </c:if>
 
-                <form action="Loginexecute.action" method="post" class="mx-auto" style="width: 300px;">
+                <form action="AdministratorLoginexecute.action" method="post" class="mx-auto" style="width: 300px;">
 
                     <!-- No2: ログインID -->
                     <div class="mb-3 position-relative">
