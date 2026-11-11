@@ -408,10 +408,4 @@ public class OrdersDao extends Dao {
 		return check;
 	}
 	
-
-
-	//カート番号が一致するカート明細のリストを取得
-	//1件ずつoDDaoのOrderDetails createOD(int orderNumber,int productNumber,int orderQuantity) 
-	//カートをクリア
-	
 }
