@@ -22,7 +22,6 @@ public class CartsDao extends Dao {
 			try(ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					cart = new Carts();
-					
 					cart.setCartNumber(rs.getInt("cart_number"));
 					cart.setUserNumber(rs.getInt("user_number"));
 					cart.setCartTotal(rs.getInt("cart_total"));

@@ -21,7 +21,6 @@ public class TablesDao extends Dao {
 			
 			while (rs.next()) {
 				Tables table = new Tables();
-				
 				table.setTableNumber(rs.getInt("table_number"));
 				table.setTableType(rs.getString("table_type"));
 				table.setTableStatus(rs.getString("table_status"));
@@ -44,7 +43,6 @@ public class TablesDao extends Dao {
 			try (ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					table = new Tables();
-					
 					table.setTableNumber(rs.getInt("table_number"));
 					table.setTableType(rs.getString("table_type"));
 					table.setTableStatus(rs.getString("table_status"));

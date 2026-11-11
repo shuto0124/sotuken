@@ -21,7 +21,6 @@ public class ProductsDao extends Dao {
 			
 			while (rs.next()) {
 				Products product = new Products();
-				
 				product.setProductNumber(rs.getInt("product_number"));
 				product.setProductName(rs.getString("product_name"));
 				product.setProductImage(rs.getString("product_image"));
@@ -47,7 +46,6 @@ public class ProductsDao extends Dao {
 			try (ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					product = new Products();
-					
 					product.setProductNumber(rs.getInt("product_number"));
 					product.setProductName(rs.getString("product_name"));
 					product.setProductImage(rs.getString("product_image"));
@@ -82,15 +80,16 @@ public class ProductsDao extends Dao {
 					count = st.executeUpdate();
 				}
 			} else {
-				String sql = "UPDATE PRODUCTS SET product_number = ?, product_name = ?, product_description = ?, product_price = ?, product_stock = ?, product_image = ?";
+				String sql = "UPDATE PRODUCTS SET product_name = ?, product_description = ?, product_price = ?, product_stock = ?, product_image = ? WHERE product_number = ?";
 				
 				try (PreparedStatement st = con.prepareStatement(sql)) {
-					st.setInt(1, products.getProductNumber());
-					st.setString(2, products.getProductName());
-					st.setString(3, products.getProductDescription());
-					st.setInt(4, products.getProductPrice());
-					st.setInt(5, products.getProductStock());
-					st.setString(6, products.getProductImage());
+					st.setString(1, products.getProductName());
+					st.setString(2, products.getProductDescription());
+					st.setInt(3, products.getProductPrice());
+					st.setInt(4, products.getProductStock());
+					st.setString(5, products.getProductImage());
+					
+					st.setInt(6, products.getProductNumber());
 					
 					count = st.executeUpdate();
 				}
