@@ -18,7 +18,7 @@ public class UsersDao extends Dao {
 		PreparedStatement statement = null;
 		
 		try {
-			statement = connection.prepareStatement("select * from users where user_number=?,password=?");
+			statement = connection.prepareStatement("select * from users where user_number=? and password=?");
 			statement.setInt(1, userNumber);
 			statement.setString(2, password);
 			ResultSet rSet = statement.executeQuery();
