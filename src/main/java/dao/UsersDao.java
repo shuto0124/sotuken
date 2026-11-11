@@ -11,6 +11,52 @@ import bean.Users;
 
 
 public class UsersDao extends Dao {
+	//ログイン認証(userNumber password)
+	public Users login(int userNumber,String password) throws Exception {
+		Users users = new Users();
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		
+		try {
+			statement = connection.prepareStatement("select * from users where user_number=?,password=?");
+			statement.setInt(1, userNumber);
+			statement.setInt(2, userNumber);
+			ResultSet rSet = statement.executeQuery();
+			GroupsDao groupsDao = new GroupsDao();
+			
+			if (rSet.next()) {
+				users.setUserNumber(rSet.getInt("user_number"));
+				users.setUserName(rSet.getString("user_name"));
+				users.setPassword(rSet.getString("password"));
+				users.setAccountStatus(rSet.getString("account_status"));
+				  
+				users.setGroups(groupsDao.get(rSet.getInt("group_number")));
+			} else {
+				users = null;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		}  
+		return users;
+	}
+	
+	
+	
 	//個人番号から情報を取得
 	public Users get(int userNumber) throws Exception {
 		Users users = new Users();
