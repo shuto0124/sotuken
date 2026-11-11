@@ -378,7 +378,10 @@ public class OrdersDao extends Dao {
 				}
 			}
 			if (check == true) {
-				//カートをクリアする処理
+				boolean check2 = cDDao.deleteAllByCartNumber(cartNumber);
+				if (check2 != true) {
+					System.out.print("カートの中身の削除が失敗");
+				}
 			} else {
 				statement = connection.prepareStatement(
 						"delete from orderdetails where order_number=?");
