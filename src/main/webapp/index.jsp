@@ -8,7 +8,7 @@
 <title></title>
 <script>
 //ログインページにリダイレクト
-location.href="/スマ食/sumasyoku/Login.action";
+location.href="/スマ食/sumasyoku/Start.action";
 </script>
 </head>
 <body>
