@@ -220,7 +220,11 @@ public class UsersDao extends Dao {
 				statement.setString(2, users.getUserName());
 				statement.setString(3, users.getPassword());
 				statement.setString(4, users.getAccountStatus());
-				statement.setInt(5, users.getGroups().getGroupNumber());
+				if (users.getGroups() != null) {
+				    statement.setInt(4, users.getGroups().getGroupNumber());
+				} else {
+				    statement.setNull(4, java.sql.Types.INTEGER);
+				}
 			//存在する 更新
 			} else {
 				statement = connection.prepareStatement(
@@ -228,7 +232,11 @@ public class UsersDao extends Dao {
 				statement.setString(1, users.getUserName());
 				statement.setString(2, users.getPassword());
 				statement.setString(3, users.getAccountStatus());
-				statement.setInt(4, users.getGroups().getGroupNumber());
+				if (users.getGroups() != null) {
+				    statement.setInt(4, users.getGroups().getGroupNumber());
+				} else {
+				    statement.setNull(4, java.sql.Types.INTEGER);
+				}
 				statement.setInt(5, users.getUserNumber());
 			}
 			count = statement.executeUpdate();

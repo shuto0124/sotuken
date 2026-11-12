@@ -3,7 +3,12 @@
 <div class="card-header text-center py-3" style="background-color: #f0f0f0;">
 <h1>初回登録</h1>
 </div>
-<form action="userRegisterExecute.action" method="post"> 
+<form action="RegisterExecute.action" method="post"> 
+<!-- エラーメッセージ -->
+        <c:if test="${not empty msg}">
+            <p class="register-error">
+                ${msg}
+            </p>
  <!-- No1: ログインID -->
 	<div class="mb-3 position-relative">個人番号
 	</span>
@@ -23,4 +28,4 @@
 	</div>
 </form>
 
-<button type="button" onclick="location.href='start.jsp'">戻る</button>
+<button type="button" onclick="location.href='Start.action'">戻る</button>

@@ -9,6 +9,6 @@
 </div>
     
 <div class="text-center">
-<button type="button" onclick="location.href='register.jsp'">初回登録</button>
+<button type="button" onclick="location.href='Register.action'">初回登録</button>
 </div>
       
