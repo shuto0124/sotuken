@@ -6,5 +6,5 @@
  
  <!-- No1: トップボタン -->
 <div class="text-center">
-<button type="button" onclick="location.href='top.jsp'">トップ</button>
+<button type="button" onclick="location.href=''">トップ</button>
 </div>
