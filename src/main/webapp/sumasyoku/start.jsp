@@ -5,7 +5,7 @@
 </div>
 
 <div class="text-center">
-<button type="button" onclick="location.href='login.jsp'">ログイン</button>
+<button type="button" onclick="location.href='Login.action'">ログイン</button>
 </div>
     
 <div class="text-center">

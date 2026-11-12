@@ -22,7 +22,7 @@ public class LoginExecuteAction extends Action {
 
         if (users != null) {
             session.setAttribute("user", users);
-            res.sendRedirect("xxxxxxxxx.action"); //完了時に飛ぶ場所
+            res.sendRedirect("Top.action"); //完了時に飛ぶ場所
         } else {
         String message = "ログインに失敗しました。個人番号またはパスワードが正しくありません。";
         req.setAttribute("msg", message);
