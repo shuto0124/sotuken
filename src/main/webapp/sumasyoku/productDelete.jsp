@@ -10,7 +10,7 @@
  <input type="hidden" name="productNumber" value="${product.productNumber }">
  <div>
 	<p>
-	<img src="${productImage}"  alt="ダミー画像" width="100" height="100">
+	<img src="${pageContext.request.contextPath}/images/${product.productImage}"  alt="ダミー画像" width="100" height="100">
 	</p>
 		
 	<p>
