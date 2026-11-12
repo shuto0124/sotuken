@@ -7,7 +7,7 @@
 <h1>商品管理</h1>
 </div>
 <button type="button" onclick="location.href='productRegister.jsp'">登録</button>
-<button type="button" onclick="location.href='top.jsp'">戻る</button>
+<button type="button" onclick="location.href=''">戻る</button>
 <p class="mb-3"></p>
 
 <%--<c:forEach var="product" items="${productList}">--%>
