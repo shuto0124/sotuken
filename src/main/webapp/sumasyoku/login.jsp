@@ -21,7 +21,7 @@
 	<input type="password" name="password" required placeholder="30文字以内の半角英数字でご入力ください">
 	</div>
 
-<!-- No3: 登録ボタン -->
+<!-- No3: ログインボタン -->
 	<div class="text-center">
 	<button type="submit">ログインする
 	</button>
