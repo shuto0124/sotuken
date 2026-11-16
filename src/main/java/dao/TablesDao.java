@@ -3,6 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,9 +23,12 @@ public class TablesDao extends Dao {
 			
 			while (rs.next()) {
 				Tables table = new Tables();
+				
 				table.setTableNumber(rs.getInt("table_number"));
 				table.setTableType(rs.getString("table_type"));
 				table.setTableStatus(rs.getString("table_status"));
+				
+				list.add(table);
 			}
 		}
 		
@@ -43,6 +48,7 @@ public class TablesDao extends Dao {
 			try (ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
 					table = new Tables();
+					
 					table.setTableNumber(rs.getInt("table_number"));
 					table.setTableType(rs.getString("table_type"));
 					table.setTableStatus(rs.getString("table_status"));
@@ -53,18 +59,52 @@ public class TablesDao extends Dao {
 		return table;
 	}
 	
+	
 	//	更新
-	public boolean updateStatus(int tableNumber, String tableStatus) throws Exception {
-		String sql = "UPDATE TABLES SET table_status = ? WHERE table_number = ?";
+	public boolean updateStatus(int tableNumber, String tableStatus, LocalDateTime temporaryEndTime) throws Exception {
+		String sql = "UPDATE TABLES SET table_status = ? temporary_end_time = ? WHERE table_number = ?";
 		
 		try(Connection con = getConnection();
 			PreparedStatement st = con.prepareStatement(sql)) {
 			
 			st.setString(1, tableStatus);
-			st.setInt(2, tableNumber);
+			st.setTimestamp(2, java.sql.Timestamp.valueOf(temporaryEndTime));
+			st.setInt(3, tableNumber);
 			
 			int line = 	st.executeUpdate();
 			return line > 0; 
+		}
+	}
+	
+	//時間切れ仮予約をクリア
+	public void clearTemporary() throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+
+		try {
+			statement = connection.prepareStatement(
+					"UPDATE TABLES SET table_status = '空席',temporary_end_time = NULL "
+					+ "WHERE table_status = '仮予約' AND temporary_end_time <= CURRENT_TIMESTAMP;");
+			statement.executeUpdate();
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
 		}
 	}
 }
