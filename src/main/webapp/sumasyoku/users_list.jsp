@@ -14,7 +14,6 @@
            
             <c:choose>
                 <c:when test="${users.size() > 0}">
-                    <div>検索結果：${users.size()}件</div>
                     <table class="table table-hover">
                         <tr>
                             <th>個人番号</th>
@@ -23,11 +22,11 @@
                         </tr>
                         <c:forEach var="user" items="${users}">
                             <tr>
-                                <td>${users.userNumber}</td>
-                                <td>${users.userName}</td>
-                                <td>${users.accountStatus}</td>
-                                <td><a href="UserUpdate.action?user_number=${users.userNumber}" class="btn btn-primary btn-lg w-30">変更</a></td>
-                                <td><a href="UserDelete.action?user_number=${users.userNumber}" class="btn btn-primary btn-lg w-30">削除</a></td>
+                                <td>${user.userNumber}</td>
+                                <td>${user.userName}</td>
+                                <td>${user.accountStatus}</td>
+                                <td><a href="UserUpdate.action?user_number=${user.userNumber}" class="btn btn-primary btn-lg w-30">変更</a></td>
+                                <td><a href="UserDelete.action?user_number=${user.userNumber}" class="btn btn-primary btn-lg w-30">削除</a></td>
                             </tr>
                         </c:forEach>
                     </table>

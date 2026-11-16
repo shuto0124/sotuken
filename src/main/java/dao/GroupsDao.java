@@ -99,10 +99,10 @@ public class GroupsDao extends Dao {
 		int count = 0;
 		Groups groups = new Groups();
 		
-		do {
-			Random random = new Random();
-			int groupNumber = random.nextInt(90000) + 10000;
-			try {
+		try {
+			do {
+				Random random = new Random();
+				int groupNumber = random.nextInt(90000) + 10000;
 				statement = connection.prepareStatement(
 						"select group_number from groups where group_number=?");
 				statement.setInt(1, groupNumber);
@@ -122,27 +122,26 @@ public class GroupsDao extends Dao {
 					statement.setInt(2, 1);
 					count = statement.executeUpdate();
 				}
-			} catch (Exception e) {
-				throw e;
-			} finally {
-				if (statement != null) {
-					try {
-						statement.close();
-					} catch (SQLException sqle) {
-						throw sqle;
-					}
+			} while (count == 0); 
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
 				}
-				
-				if (connection != null) {
-					try {
-						connection.close();
-					} catch (SQLException sqle) {
-						throw sqle;
-					}
-				}
-			} 
-		} while (count > 0); 
+			}
 			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 	
 		return groups;
 	}
 	//グループの人数の更新
@@ -160,7 +159,7 @@ public class GroupsDao extends Dao {
 				mcount += 1;
 			}
 			statement.close();
-			statement = connection.prepareStatement("update groups set member_count=? where group_number");
+			statement = connection.prepareStatement("update groups set member_count=? where group_number=?");
 			statement.setInt(1, mcount);
 			statement.setInt(2, groupNomber);
 			

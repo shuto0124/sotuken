@@ -1,10 +1,13 @@
 package bean;
 
+import java.time.LocalDateTime;
+
 public class Tables implements java.io.Serializable {
 	
 	private int tableNumber;
 	private String tableType;
 	private String tableStatus;
+	private LocalDateTime temporaryEndTime;
 
 	
 	public int getTableNumber() {
@@ -19,6 +22,10 @@ public class Tables implements java.io.Serializable {
 		return tableStatus;
 	}
 	
+	public LocalDateTime getTemporaryEndTime() {
+		return temporaryEndTime;
+	}
+	
 	public void setTableNumber(int tableNumber) {
 		this.tableNumber = tableNumber;
 	}
@@ -31,5 +38,8 @@ public class Tables implements java.io.Serializable {
 		this.tableStatus = tableStatus;
 	}
 	
+	public void setTemporaryEndTime(LocalDateTime temporaryEndTime) {
+		this.temporaryEndTime = temporaryEndTime;
+	}
 
 }
