@@ -20,7 +20,6 @@ public class GroupAction extends Action {
         int userNumber = users.getUserNumber();
         
         
-//        int groupNumber=users.getGroups().getGroupNumber();
         
         Users user = userDao.get(userNumber);
         
