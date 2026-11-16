@@ -17,9 +17,8 @@ public class GroupAction extends Action {
         
         Users users=(Users)session.getAttribute("user");
         
-        String userNumberStr = (String)session.getAttribute("groupNumber");
+        int userNumber = users.getUserNumber();
         
-        int userNumber = Integer.parseInt(userNumberStr);
         
 //        int groupNumber=users.getGroups().getGroupNumber();
         
@@ -34,7 +33,6 @@ public class GroupAction extends Action {
         
         
         request.setAttribute("user", user);
-//        request.setAttribute("groupNumber", groupNumber);
         
         request.getRequestDispatcher("group.jsp").forward(request, response);
     }
