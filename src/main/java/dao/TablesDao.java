@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,11 @@ public class TablesDao extends Dao {
 				table.setTableNumber(rs.getInt("table_number"));
 				table.setTableType(rs.getString("table_type"));
 				table.setTableStatus(rs.getString("table_status"));
-				table.setTemporaryEndTime((LocalDateTime) rs.getObject("temporary_end_time"));
-				
+				Timestamp timestamp = rs.getTimestamp("temporary_end_time");
+
+				if (timestamp != null) {
+				    table.setTemporaryEndTime(timestamp.toLocalDateTime());
+				}
 				list.add(table);
 			}
 		}
@@ -53,7 +57,11 @@ public class TablesDao extends Dao {
 					table.setTableNumber(rs.getInt("table_number"));
 					table.setTableType(rs.getString("table_type"));
 					table.setTableStatus(rs.getString("table_status"));
-					table.setTemporaryEndTime((LocalDateTime) rs.getObject("temporary_end_time"));
+					Timestamp timestamp = rs.getTimestamp("temporary_end_time");
+
+					if (timestamp != null) {
+					    table.setTemporaryEndTime(timestamp.toLocalDateTime());
+					}
 				}
 			}
 		}
@@ -64,7 +72,7 @@ public class TablesDao extends Dao {
 	
 	//	更新
 	public boolean updateStatus(int tableNumber, String tableStatus, LocalDateTime temporaryEndTime) throws Exception {
-		String sql = "UPDATE TABLES SET table_status = ? ,temporary_end_time = ? WHERE table_number = ?";
+		String sql = "UPDATE TABLES SET table_status = ?,temporary_end_time = ? WHERE table_number = ?";
 		
 		try(Connection con = getConnection();
 			PreparedStatement st = con.prepareStatement(sql)) {
