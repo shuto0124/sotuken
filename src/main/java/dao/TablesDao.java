@@ -15,7 +15,7 @@ public class TablesDao extends Dao {
 	//	全件取得
 	public List<Tables> findAll() throws Exception {
 		List<Tables> list = new ArrayList<>();
-		String sql = "SELECT table_number, table_type, table_status FROM TABLES ORDER BY table_number";
+		String sql = "SELECT table_number, table_type, table_status, temporary_end_time FROM TABLES ORDER BY table_number";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql);
@@ -27,6 +27,7 @@ public class TablesDao extends Dao {
 				table.setTableNumber(rs.getInt("table_number"));
 				table.setTableType(rs.getString("table_type"));
 				table.setTableStatus(rs.getString("table_status"));
+				table.setTemporaryEndTime((LocalDateTime) rs.getObject("temporary_end_time"));
 				
 				list.add(table);
 			}
@@ -38,7 +39,7 @@ public class TablesDao extends Dao {
 	//	詳細取得
 	public Tables findByNumber(int tableNumber) throws Exception {
 		Tables table = null;
-		String sql = "SELECT table_number, table_type, table_status FROM TABLES WHERE table_number = ?";
+		String sql = "SELECT table_number, table_type, table_status, temporary_end_time FROM TABLES WHERE table_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
@@ -52,6 +53,7 @@ public class TablesDao extends Dao {
 					table.setTableNumber(rs.getInt("table_number"));
 					table.setTableType(rs.getString("table_type"));
 					table.setTableStatus(rs.getString("table_status"));
+					table.setTemporaryEndTime((LocalDateTime) rs.getObject("temporary_end_time"));
 				}
 			}
 		}
