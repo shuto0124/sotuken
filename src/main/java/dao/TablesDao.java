@@ -64,7 +64,7 @@ public class TablesDao extends Dao {
 	
 	//	更新
 	public boolean updateStatus(int tableNumber, String tableStatus, LocalDateTime temporaryEndTime) throws Exception {
-		String sql = "UPDATE TABLES SET table_status = ? temporary_end_time = ? WHERE table_number = ?";
+		String sql = "UPDATE TABLES SET table_status = ? ,temporary_end_time = ? WHERE table_number = ?";
 		
 		try(Connection con = getConnection();
 			PreparedStatement st = con.prepareStatement(sql)) {
