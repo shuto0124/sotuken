@@ -13,7 +13,7 @@
     <button type="button" onclick="location.href='reserve.jsp'">予約</button>
     </div>
     <div class="text-center">
-    <button type="button" onclick="location.href='group.jsp'">グループ</button>
+    <button type="button" onclick="location.href='group.action'">グループ</button>
     </div>
     <div class="text-center">
     <button type="button" onclick="location.href='reserveConfi.jsp'">予約状況確認</button>
