@@ -26,12 +26,12 @@ public class AdministratorLoginExecuteAction extends Action {
         		res.sendRedirect("Manegements.action"); //完了時に飛ぶ場所
         	} else {
         		req.setAttribute("msg", "管理者権限がありません");
-        		req.getRequestDispatcher("administratorlogin.jsp").forward(req, res);
+        		req.getRequestDispatcher("administrator_login.jsp").forward(req, res);
         	}
         } else {
         String message = "個人番号またはパスワードが正しくありません";
         req.setAttribute("msg", message);
-        req.getRequestDispatcher("administratorlogin.jsp")
+        req.getRequestDispatcher("administrator_login.jsp")
 		.forward(req, res);
         }
     }

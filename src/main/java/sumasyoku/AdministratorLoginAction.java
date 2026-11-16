@@ -7,6 +7,6 @@ import tool.Action;
 
 public class AdministratorLoginAction extends Action{
 	public void execute(HttpServletRequest request,HttpServletResponse response)throws Exception{
-		request.getRequestDispatcher("administratorlogin.jsp").forward(request, response);
+		request.getRequestDispatcher("administrator_login.jsp").forward(request, response);
 	}
 }
