@@ -22,6 +22,8 @@
     <button type="button" onclick="location.href='passwordChange.jsp'">パスワードの変更</button>
     </div>
     <div class="text-center">                        
-    <button type="button" onclick="location.href='logout.jsp'">ログアウト</button>
+    	<form action="LogoutExecute.action" method="post" onsubmit="return confirm('ログアウトしますか');">
+    		<button type="submit">ログアウト</button>
+    	</form>   
     </div>
 </div>         
