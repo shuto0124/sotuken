@@ -100,7 +100,7 @@
 
     <!-- グループID入力と参加ボタン -->
     <div class="top-action">
-        <input type="text" id="groupIdInput" class="group-id-input" placeholder="グループID">
+        <input type="text" id="groupIdInput" class="group-id-input" value="${user.groups.groupNumber}">
         <button type="button" class="btn-join" onclick="joinGroup()">参加</button>
     </div>
 
