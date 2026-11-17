@@ -9,87 +9,81 @@ import tool.Action;
 
 public class PassChangeAction extends Action {
 
-    @Override
     public void execute(
             HttpServletRequest req,
-            HttpServletResponse res) throws Exception {
+            HttpServletResponse res)
+            throws Exception {
 
         HttpSession session = req.getSession();
 
-        Users user = (Users) session.getAttribute("users");
+        Users user = (Users) session.getAttribute("user");
 
-        String currentPassword =
-                req.getParameter("currentPassword");
+        String currentPassword = req.getParameter("currentPassword");
+        String newPassword = req.getParameter("newPassword");
+        String confirmPassword = req.getParameter("confirmPassword");
 
-        String newPassword =
-                req.getParameter("newPassword");
-
-        String confirmPassword =
-                req.getParameter("confirmPassword");
+        // ログインチェック
+        if (user == null) {
+            res.sendRedirect("Login.action");
+            return;
+        }
 
         // 未入力チェック
-        if (currentPassword == null || currentPassword.isEmpty()
+        if 
+        (currentPassword == null || currentPassword.isEmpty()
                 || newPassword == null || newPassword.isEmpty()
                 || confirmPassword == null || confirmPassword.isEmpty()) {
 
-            req.setAttribute("error", "すべて入力してください");
+            req.setAttribute("msg", "すべて入力してください");
             req.getRequestDispatcher("passwordChange.jsp")
-                    .forward(req, res);
+               .forward(req, res);
             return;
         }
 
-        // 現在のパスワード確認
+        // 現在パスワード確認
         if (!user.getPassword().equals(currentPassword)) {
 
-            req.setAttribute("error", "現在のパスワードが違います");
+            req.setAttribute("msg", "現在のパスワードが違います");
             req.getRequestDispatcher("passwordChange.jsp")
-                    .forward(req, res);
+               .forward(req, res);
             return;
         }
 
-        // 新旧同一チェック
         if (currentPassword.equals(newPassword)) {
 
-            req.setAttribute("error",
+            req.setAttribute("msg",
                     "現在と異なるパスワードを入力してください");
             req.getRequestDispatcher("passwordChange.jsp")
-                    .forward(req, res);
+               .forward(req, res);
             return;
         }
 
-        // 確認用パスワードチェック
+        // 確認用パスワード確認
         if (!newPassword.equals(confirmPassword)) {
 
-            req.setAttribute("error",
+            req.setAttribute("msg",
                     "確認用パスワードが一致しません");
             req.getRequestDispatcher("passwordChange.jsp")
-                    .forward(req, res);
+               .forward(req, res);
             return;
         }
+
+        // パスワード更新
+        user.setPassword(newPassword);
 
         UsersDao dao = new UsersDao();
 
-        user.setPassword(newPassword);
+        if (dao.save(user)) {
 
-        boolean result = dao.save(user);
-
-        if (result) {
-
-            session.setAttribute("users", user);
-
-            req.setAttribute("message",
-                    "パスワードを変更しました");
-
-            req.getRequestDispatcher("top.jsp")
-                    .forward(req, res);
+            session.setAttribute("user", user);
+            res.sendRedirect("Top.action");
 
         } else {
 
-            req.setAttribute("error",
+            req.setAttribute("msg",
                     "パスワード変更に失敗しました");
-
             req.getRequestDispatcher("passwordChange.jsp")
-                    .forward(req, res);
+               .forward(req, res);
         }
     }
 }
