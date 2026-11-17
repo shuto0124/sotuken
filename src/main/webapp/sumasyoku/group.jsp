@@ -99,14 +99,16 @@
     <h2>グループ</h2>
 
     <!-- グループID入力と参加ボタン -->
+    <form action="GroupJoin.action" method="post">
     <div class="top-action">
-        <input type="text" id="groupIdInput" class="group-id-input" placeholder="グループID">
-        <button type="button" class="btn-join" onclick="joinGroup()">参加</button>
+        <input type="text" id="groupIdInput" name="groupId" class="group-id-input" value="${user.groups.groupNumber }">
+        <button type="submit" class="btn-join" >参加</button>
     </div>
+    </form>
 
     <!-- 現在のグループID表示 -->
     <div class="info-box">
-        グループID： <span id="displayGroupId">xxxx</span>
+        グループID： <span id="displayGroupId">${user.groups.groupNumber}</span>
     </div>
 
     <!-- グループメンバー一覧 -->
