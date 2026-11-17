@@ -6,11 +6,11 @@
 <h1>商品削除</h1>
 </div>
  
-<form action="productDeleteExecute.action" method="post">
+<form action="ProductDeleteExecute.action" method="post">
  <input type="hidden" name="productNumber" value="${product.productNumber }">
  <div>
 	<p>
-	<img src="${productImage}"  alt="ダミー画像" width="100" height="100">
+	<img src="${pageContext.request.contextPath}/images/${product.productImage}" 
 	</p>
 		
 	<p>
