@@ -146,7 +146,8 @@
 <tr>
 
 <td>
-<form action="reserveType.jsp">
+<%-- 来た場所に戻るように後で調整 --%>
+<form action="SeatSelect.action">
 
 <button type="submit"
         style="width:130px;height:50px;font-size:20px;">

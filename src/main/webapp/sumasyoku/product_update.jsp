@@ -6,7 +6,7 @@
 	<h1>商品更新</h1>
 </div>
 
-<form action="productUpdateExecute.action" method="post">
+<form action="ProductUpdateExecute.action" method="post">
 	<input type="hidden" name="productNumber" value="${product.productNumber}">
 	<p>
 	商品名	：

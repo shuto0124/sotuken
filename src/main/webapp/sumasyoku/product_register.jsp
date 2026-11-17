@@ -17,7 +17,7 @@
 
 <br>
 
-<form action="productRegisterComplete.jsp"
+<form action="product_register_complete.jsp"
       method="post"
       enctype="multipart/form-data">
 
@@ -27,7 +27,7 @@
 <td>
 
 <input type="text"
-       name="productId"
+       name="productNumber"
        size="30"
        placeholder="商品番号の入力欄">
 
@@ -51,7 +51,7 @@
 <br>
 
 <input type="text"
-       name="price"
+       name="productPrice"
        size="30"
        placeholder="価格の入力欄">
 
@@ -62,7 +62,7 @@
 <td>
 <br>
 
-<textarea name="description"
+<textarea name="productDescription"
           rows="6"
           cols="35"
           placeholder="商品説明の入力欄"></textarea>
@@ -74,7 +74,19 @@
 <td>
 <br>
 
-<input type="file" name="image">
+<input type="text"
+       	  name="productStock"
+       	  size="30"
+          placeholder="商品在庫数の入力欄"></textarea>
+
+</td>
+</tr>
+
+<tr>
+<td>
+<br>
+
+<input type="file" name="productImage">
 
 </td>
 </tr>
@@ -89,7 +101,7 @@
 
 <td>
 <button type="button"
-        onclick="location.href='productManagement.jsp'"
+        onclick="location.href='product_management.jsp'"
         style="width:120px;height:50px;">
 戻る
 </button>

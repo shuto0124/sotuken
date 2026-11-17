@@ -41,7 +41,7 @@ public class RegisterExecuteAction extends Action {
         }
         if (success == true) {
             session.setAttribute("user", users);
-            res.sendRedirect("registerComplete.jsp"); //完了時に飛ぶ場所
+            res.sendRedirect("register_complete.jsp"); //完了時に飛ぶ場所
         } else {
         String message = "登録に失敗しました";
         req.setAttribute("msg", message);

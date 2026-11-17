@@ -10,7 +10,7 @@
 	<button type="button" onclick="location.href='menu.jsp'">メニュー</button>
     </div>
     <div class="text-center">
-    <button type="button" onclick="location.href='reserve.jsp'">予約</button>
+    <button type="button" onclick="location.href='reserve_type.jsp'">予約</button>
     </div>
     <div class="text-center">
     <button type="button" onclick="location.href='Group.action'">グループ</button>
@@ -22,6 +22,8 @@
     <button type="button" onclick="location.href='passwordChange.jsp'">パスワードの変更</button>
     </div>
     <div class="text-center">                        
-    <button type="button" onclick="location.href='logout.jsp'">ログアウト</button>
+    	<form action="LogoutExecute.action" method="post" onsubmit="return confirm('ログアウトしますか');">
+    		<button type="submit">ログアウト</button>
+    	</form>   
     </div>
 </div>         
