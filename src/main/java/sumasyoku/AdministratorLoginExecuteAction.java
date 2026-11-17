@@ -25,7 +25,7 @@ public class AdministratorLoginExecuteAction extends Action {
         		session.setAttribute("user", users);
         		res.sendRedirect("Managements.action"); //完了時に飛ぶ場所
         	} else {
-        		req.setAttribute("msg", "管理者権限がありません");
+        		req.setAttribute("msg", "管理者権限がありません");//エラー
         		req.getRequestDispatcher("administrator_login.jsp").forward(req, res);
         	}
         } else {
