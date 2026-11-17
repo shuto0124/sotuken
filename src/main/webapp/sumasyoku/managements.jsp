@@ -17,7 +17,7 @@
                     <a href="UserList.action" class="btn btn-primary btn-lg w-75 py-4">ユーザー管理</a>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center mx-2 my-4 ">
-	                        <a href="" class="btn btn-primary btn-lg w-75 py-4">商品管理</a>
+	                        <a href="ProductsManagement.action" class="btn btn-primary btn-lg w-75 py-4">商品管理</a>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center mx-2 my-4 ">
                     <a href="" class="btn btn-primary btn-lg w-75 py-4">利用時間管理</a>
