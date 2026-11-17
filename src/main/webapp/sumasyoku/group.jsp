@@ -111,10 +111,10 @@
 
     <!-- グループメンバー一覧 -->
     <div class="member-list" id="memberListContainer">
-        <div class="member-item">グループメンバー</div>
-        <div class="member-item">グループメンバー</div>
-        <div class="member-item">グループメンバー</div>
-        <div class="member-item">グループメンバー</div>
+        <div class="member-item" id="member-1">グループメンバー</div>
+        <div class="member-item" id="member-2">グループメンバー</div>
+        <div class="member-item" id="member-3">グループメンバー</div>
+        <div class="member-item" id="member-4">グループメンバー</div>
     </div>
 
     <!-- 画面下部のボタン -->
