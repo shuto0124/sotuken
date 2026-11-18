@@ -27,7 +27,7 @@
 
 <br><br><br>
 
-<form action="productManagement.jsp">
+<form action="ProductsManagement.action">
     <button type="submit"
             style="width:150px;height:60px;">
         商品管理へ戻る
