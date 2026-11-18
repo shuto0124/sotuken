@@ -15,9 +15,9 @@
 			<img src="${pageContext.request.contextPath}/images/${product.productImage}" 
 				 alt="${product.productName}" width="100" height="100">
 			<p>商品名：${product.productName}</p>
-			<p>価格：${product.productPrice}</p>
+			<p>価格：${product.productPrice}円</p>
 			<form action="ProductsManagementExecute.action" method="post">
-				<p>提供数：${product.productStock}</p> 
+				<p>提供数：${product.productStock}食分</p> 
 				<input type="hidden" name="productNumber" value="${product.productNumber }">
 				<input type="number" name="productStock" min="0" required>
 				<button type="submit">提供数更新</button>
