@@ -35,8 +35,8 @@ public class SeatSelectExecuteAction extends Action {
                 	} else {
                 		System.out.println("仮予約失敗");
                 	}
-                	
-                	req.getRequestDispatcher("product_list.jsp")
+                	req.setAttribute("backPage", "seat");
+                	req.getRequestDispatcher("ProductList.action")
             		.forward(req, res);
                 
             } else {

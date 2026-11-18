@@ -112,6 +112,7 @@
 
 <td align="center">
 <form action="productDetail.jsp">
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <input type="hidden" name="id" value="4">
 
 <button type="submit"
@@ -146,15 +147,21 @@
 <tr>
 
 <td>
-<%-- 来た場所に戻るように後で調整 --%>
-<form action="SeatSelect.action">
+<c:choose>
+    <c:when test="${backPage == 'seat'}">
+        <form action="SeatSelect.action" method="get">
+            <button type="submit"
+             style="width:130px;height:50px;font-size:20px;">戻る</button>
+        </form>
+    </c:when>
 
-<button type="submit"
-        style="width:130px;height:50px;font-size:20px;">
-戻る
-</button>
-
-</form>
+    <c:when test="${backPage == 'reservation'}">
+        <form action="reserve_type.jsp" method="get">
+            <button type="submit"
+             style="width:130px;height:50px;font-size:20px;">戻る</button>
+        </form>
+    </c:when>
+</c:choose>
 </td>
 
 <td width="80"></td>

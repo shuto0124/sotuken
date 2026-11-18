@@ -78,7 +78,11 @@ public class TablesDao extends Dao {
 			PreparedStatement st = con.prepareStatement(sql)) {
 			
 			st.setString(1, tableStatus);
-			st.setTimestamp(2, java.sql.Timestamp.valueOf(temporaryEndTime));
+			if (temporaryEndTime != null) {
+			    st.setTimestamp(2, java.sql.Timestamp.valueOf(temporaryEndTime));
+			} else {
+			    st.setNull(2, java.sql.Types.TIMESTAMP);
+			}
 			st.setInt(3, tableNumber);
 			
 			int line = 	st.executeUpdate();
