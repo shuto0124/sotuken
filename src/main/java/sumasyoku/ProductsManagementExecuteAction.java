@@ -18,7 +18,7 @@ public class ProductsManagementExecuteAction extends Action {
         Products old = dao.findByNumber(productNumber);
         if (old == null) {
             req.setAttribute("msg", "対象の商品が見つかりません");
-            req.getRequestDispatcher("products_management.jsp").forward(req, res);
+            req.getRequestDispatcher("ProductsManagement.action").forward(req, res);
             return;
         }
         

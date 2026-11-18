@@ -6,6 +6,11 @@
 <div class="card-header text-center py-3" style="background-color: #f0f0f0;">
 <h1>商品管理</h1>
 </div>
+<c:if test="${not empty msg}">
+    <script>
+        alert('<c:out value="${msg}" />');
+    </script>
+</c:if>
 <button type="button" onclick="location.href='ProductRegister.action'">登録</button>
 <button type="button" onclick="location.href='Managements.action'">戻る</button>
 <p class="mb-3"></p>
