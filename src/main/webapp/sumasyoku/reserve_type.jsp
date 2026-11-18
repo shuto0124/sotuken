@@ -26,7 +26,7 @@
 
 <br><br>
 
-<form action="seatSelect.jsp">
+<form action="SeatSelect.action">
     <button type="submit"
             style="width:300px; height:80px; font-size:24px;">
         座席と商品の予約
