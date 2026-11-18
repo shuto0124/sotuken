@@ -121,6 +121,10 @@
 <div class="screen-container">
 
     <h2>グループ</h2>
+    
+    <c:if test="${not empty error }">
+      <p>${error}</p>
+    </c:if>
 
     <!-- グループID入力と参加ボタン -->
     <form action="GroupJoin.action" method="post">

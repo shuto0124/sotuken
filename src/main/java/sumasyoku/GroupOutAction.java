@@ -18,7 +18,7 @@ public class GroupOutAction extends Action {
         
         // DAOにある exitGroupメソッド を呼び出す
         dao.exitGroup(user);
-        
+       
 
         response.sendRedirect("Group.action");
     }

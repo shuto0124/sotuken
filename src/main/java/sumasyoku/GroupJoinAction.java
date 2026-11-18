@@ -17,9 +17,17 @@ public class GroupJoinAction extends Action {
         Users user = (Users) session.getAttribute("user");
 
         GroupsDao dao = new GroupsDao();
-        dao.joinGroup(user, groupNumber);
+        String result = dao.joinGroup(user, groupNumber);
         
-        
+         if ("満員".equals(result)) {
+        	 request.setAttribute("error", "グループが満員です");
+        	 request.getRequestDispatcher("group.jsp").forward(request, response);
+        	 return;
+         }else if ("グループが見つからない".equals(result)) {
+        	 request.setAttribute("error", "グループが見つかりませんでした");
+        	 request.getRequestDispatcher("group.jsp").forward(request, response);
+        	 return;
+         }
 //        request.setAttribute("user", user);
 
         response.sendRedirect("Group.action");
