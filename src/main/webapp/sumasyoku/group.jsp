@@ -125,28 +125,17 @@
     <!-- グループID入力と参加ボタン -->
     <form action="GroupJoin.action" method="post">
     <div class="top-action">
-<<<<<<< HEAD
         <input type="text" id="groupIdInput" name="groupId" class="group-id-input" value="${user.groups.groupNumber }">
         <button type="submit" class="btn-join" >参加</button>
-=======
 
-        <input type="text" id="groupIdInput" class="group-id-input" placeholder="グループID">
-
-        <button type="button" class="btn-join" onclick="joinGroup()">参加</button>
-
->>>>>>> branch 'master' of https://github.com/shuto0124/sotuken.git
     </div>
     </form>
 
     <!-- 現在のグループID表示 -->
     <div class="info-box">
-<<<<<<< HEAD
+
         グループID： <span id="displayGroupId">${user.groups.groupNumber}</span>
-=======
 
-        グループID： <span id="displayGroupId">xxxx</span>
-
->>>>>>> branch 'master' of https://github.com/shuto0124/sotuken.git
     </div>
 
     <!-- グループメンバー一覧 -->
@@ -162,9 +151,9 @@
     <!-- 画面下部のボタン -->
     <div class="footer-buttons">
 
-        <button type="button" class="btn-back" onclick="goBack()">戻る</button>
+        <button type="button" class="btn-back" onclick="location.href='Top.action'">戻る</button>
 
-        <button type="button" id="leaveBtn" class="btn-leave" onclick="leaveGroup()">グループから抜ける</button>
+        <button type="button" id="leaveBtn" class="btn-leave" onclick="location.href='GroupOut.action'">グループから抜ける</button>
 
     </div>
 
