@@ -17,7 +17,7 @@
 
 <br><br>
 
-<form action="product_list.jsp">
+<form action="ProductList.action">
     <button type="submit"
             style="width:300px; height:80px; font-size:24px;">
         商品の予約
