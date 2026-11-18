@@ -28,7 +28,7 @@ public class GroupJoinAction extends Action {
         	 request.getRequestDispatcher("group.jsp").forward(request, response);
         	 return;
          }
-//        request.setAttribute("user", user);
+
 
         response.sendRedirect("Group.action");
     }
