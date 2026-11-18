@@ -2,6 +2,7 @@ package sumasyoku;
 
 import bean.Users;
 import dao.GroupsDao;
+import dao.UsersDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -19,6 +20,11 @@ public class GroupJoinAction extends Action {
         GroupsDao dao = new GroupsDao();
         dao.joinGroup(user, groupNumber);
         
+        UsersDao uDao = new UsersDao();
+        user = uDao.get(user.getUserNumber());
+        if (user != null) {
+            session.setAttribute("user", user);
+        }
         
 //        request.setAttribute("user", user);
 
