@@ -232,7 +232,7 @@ public class GroupsDao extends Dao {
 			Groups groups = get(groupNumber);
 			if (groups != null) {
 				int groupNomber = groups.getGroupNumber();
-				if (groups.getMemberCount() <= 4) {
+				if (groups.getMemberCount() < 4) {
 					statement = connection.prepareStatement(
 							"update users set group_number=? where user_number=?");
 					statement.setInt(1, groupNumber);
@@ -293,7 +293,7 @@ public class GroupsDao extends Dao {
 			Groups group = createGroup();
 				if (group != null) {
 					String join = joinGroup(users,group.getGroupNumber());
-					if (join=="完了") {
+					if (join.equals("完了")) {
 						return true;
 					} else {
 						return false;
