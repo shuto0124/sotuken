@@ -1,5 +1,6 @@
 package sumasyoku;
 
+import bean.Groups;
 import bean.Users;
 import dao.GroupsDao;
 import dao.UsersDao;
@@ -14,11 +15,23 @@ public class GroupOutAction extends Action {
 
         HttpSession session = request.getSession();
         Users user = (Users) session.getAttribute("user");
-
         GroupsDao dao = new GroupsDao();
         
+        
+        Groups group = user.getGroups();
+        int groupNumber = group.getGroupNumber();
+        int representativeNumber = group.getRepresentativeNumber();
+        int userNumber = user.getUserNumber();
+        
+        
+        if (representativeNumber == userNumber) {
+        	dao.exitGroup(user);
+        	dao.representative(groupNumber);
+        } else {
         // DAOにある exitGroupメソッド を呼び出す
-        dao.exitGroup(user);
+        	dao.exitGroup(user);
+        }
+        
         
         UsersDao uDao = new UsersDao();
         user = uDao.get(user.getUserNumber());

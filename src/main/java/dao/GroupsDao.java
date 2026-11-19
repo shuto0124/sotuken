@@ -27,6 +27,7 @@ public class GroupsDao extends Dao {
 			if (rSet.next()) {
 				groups.setGroupNumber(rSet.getInt("group_number"));
 				groups.setMemberCount(rSet.getInt("member_count"));
+				groups.settRepresentativeNumber(rSet.getInt("representative_number"));
 
 			} else {
 				groups = null;
@@ -65,6 +66,7 @@ public class GroupsDao extends Dao {
 				Groups groups = new Groups();
 				groups.setGroupNumber(rSet.getInt("group_number"));
 				groups.setMemberCount(rSet.getInt("member_count"));
+				groups.settRepresentativeNumber(rSet.getInt("representative_number"));
 				
 				list.add(groups);
 			}
@@ -164,6 +166,7 @@ public class GroupsDao extends Dao {
 			statement.setInt(2, groupNomber);
 			
 			count = statement.executeUpdate();
+			
 		} catch (Exception e) {
 			throw e;
 		} finally {
@@ -287,6 +290,53 @@ public class GroupsDao extends Dao {
 	}
 	
 	
+	//グループリーダー処理
+	public boolean representative(int groupNumber) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		List<Users> list = new ArrayList<>();
+		int count = 0;
+		try {
+			UsersDao uDao = new UsersDao();
+			list = uDao.gGetAll(groupNumber);
+			if (!list.isEmpty()) {
+			    int newRepresentativeNumber = list.get(0).getUserNumber();
+				statement = connection.prepareStatement(
+						"update groups set representative_number=? where group_number=?");
+				statement.setInt(1, newRepresentativeNumber);
+				statement.setInt(2, groupNumber);
+				count = statement.executeUpdate();
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
 	//グループから抜ける
 	public Boolean exitGroup(Users users) throws Exception {
 		try {
@@ -294,7 +344,11 @@ public class GroupsDao extends Dao {
 				if (group != null) {
 					String join = joinGroup(users,group.getGroupNumber());
 					if (join.equals("完了")) {
-						return true;
+						if (representative(group.getGroupNumber())) {
+							return true;
+						} else {
+							return false;
+						}
 					} else {
 						return false;
 					}
