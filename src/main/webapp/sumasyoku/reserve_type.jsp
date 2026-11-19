@@ -35,7 +35,7 @@
 
 <br><br><br>
 
-<form action="../index.jsp">
+<form action="top.jsp">
     <button type="submit"
             style="width:120px; height:50px; font-size:20px;">
         戻る
