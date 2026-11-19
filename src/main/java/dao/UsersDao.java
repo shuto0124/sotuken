@@ -283,7 +283,7 @@ public class UsersDao extends Dao {
 				statement.close();
 				Users users = uDao.get(userNumber);
 				String status = rSet.getString("account_status");
-				if (status != "削除済み") {
+				if (!status.equals("削除済み")) {
 					users.setAccountStatus("削除済み");
 					statement = connection.prepareStatement(
 							"update users set account_status=? where user_number=?");
