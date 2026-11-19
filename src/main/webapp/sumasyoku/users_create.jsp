@@ -43,10 +43,10 @@
  
             </style>
  
-            <form method="post" action="StudentCreateExecute.action" class="mx-auto" style="width: 300px;">
+            <form method="post" action="UsersCreateExecute.action" class="mx-auto" style="width: 300px;">
  
                 <label class="text-center">個人番号</label>
-                <input type="text" class="form-control" id="user_number" name="user_number" value="${users.user_number}"
+                <input type="text" class="form-control" id="user_number" name="user_number" 
                        placeholder="個人番号を入力してください" required>
  
                 <script>
@@ -67,14 +67,16 @@
  
 
                 <label class="text-center ">氏名</label>
-                <input type="text" class="form-control" name="user_name" value="${users.userName }"
+                <input type="text" class="form-control" name="user_name" 
                        maxlength="30" placeholder="氏名を入力してください" required>
 
-                <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 20px; margin-top: 30px;">
-                    <a class="btn btn-primary btn-lg w-100">登録</a>
-                    <a class="btn btn-primary btn-lg w-100">戻る</a>
+                <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 30px; margin-top: 30px;">
+                    <button type="submit" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">登録</button>
                 </div>
-
+                
+                <div class="d-flex justify-content-center" style="margin-top: 30px;">
+                     <a href="UsersList.action" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">戻る</a>
+                </div>
  
             </form>
         </section>

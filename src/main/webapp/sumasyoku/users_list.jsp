@@ -25,8 +25,8 @@
                                 <td>${user.userNumber}</td>
                                 <td>${user.userName}</td>
                                 <td>${user.accountStatus}</td>
-                                <td><a href="UserUpdate.action?user_number=${user.userNumber}" class="btn btn-primary btn-lg w-30">変更</a></td>
-                                <td><a href="UserDelete.action?user_number=${user.userNumber}" class="btn btn-primary btn-lg w-30">削除</a></td>
+                                <td><a href="UsersUpdate.action?user_number=${user.userNumber}" class="btn btn-primary btn-lg w-30">変更</a></td>
+                                <td><a href="UsersDelete.action?user_number=${user.userNumber}" class="btn btn-primary btn-lg w-30">削除</a></td>
                             </tr>
                         </c:forEach>
                     </table>
@@ -36,7 +36,8 @@
                 </c:otherwise>
              </c:choose>
              <div class="my-2 text-end px-4">
-                <a href="StudentCreate.action" class="btn btn-primary btn-lg w-50">新規登録</a>
+                <a href="Managements.action" class="btn btn-primary btn-lg me-5">戻る</a>
+                <a href="UsersCreate.action" class="btn btn-primary btn-lg w-10">新規登録</a>
              </div>
         </section>
     </c:param>

@@ -14,7 +14,7 @@
             <h2 class="fw-bold h3 mb-3 fw-norma bg-secondary bg-opacity-10 py-2 px-4 text-center">管理</h2>
             <div class="d-flex flex-column text-center px-4 fs-3 my-5">
                 <div class="col d-flex align-items-center justify-content-center mx-2 my-4  ">
-                    <a href="UserList.action" class="btn btn-primary btn-lg w-75 py-4">ユーザー管理</a>
+                    <a href="UsersList.action" class="btn btn-primary btn-lg w-75 py-4">ユーザー管理</a>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center mx-2 my-4 ">
 	                        <a href="ProductsManagement.action" class="btn btn-primary btn-lg w-75 py-4">商品管理</a>
