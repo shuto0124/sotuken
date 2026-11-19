@@ -19,7 +19,7 @@ public class ManagementsDao extends Dao {
 		try {
 			statement = connection.prepareStatement(
 					"insert into managements(setting_number,system_start_time,"
-					+ "system_end_time,reservation_duration) value(?,?,?,?)");
+					+ "system_end_time,reservation_duration) values(?,?,?,?)");
 			statement.setInt(1, 1);
 			statement.setTime(2, java.sql.Time.valueOf("12:00:00"));
 			statement.setTime(3, java.sql.Time.valueOf("14:00:00"));
