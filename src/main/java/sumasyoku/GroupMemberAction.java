@@ -4,7 +4,9 @@ package sumasyoku;
 import java.io.PrintWriter;
 import java.util.List;
 
+import bean.Groups;
 import bean.Users;
+import dao.GroupsDao;
 import dao.UsersDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,6 +33,10 @@ public class GroupMemberAction extends Action {
 
         // ログインユーザーのグループ番号を取得
         int groupNumber = loginUser.getGroups().getGroupNumber();
+        
+        GroupsDao gDao = new GroupsDao();
+        Groups group = gDao.get(groupNumber);
+        int representativeNumber = group.getRepresentativeNumber();
 
         // DAOから同じグループのメンバーを取得
         UsersDao uDao = new UsersDao();
@@ -53,13 +59,19 @@ public class GroupMemberAction extends Action {
                 json.append(",");
             }
 
-            json.append("{");
+            boolean isRepresentative =
+                    member.getUserNumber() == representativeNumber;
 
-            json.append("\"userName\":\"")
-                .append(escapeJson(member.getUserName()))
-                .append("\"");
+                json.append("{");
 
-            json.append("}");
+                json.append("\"userName\":\"")
+                    .append(escapeJson(member.getUserName()))
+                    .append("\",");
+
+                json.append("\"isRepresentative\":")
+                    .append(isRepresentative);
+
+                json.append("}");
         }
 
         json.append("]");

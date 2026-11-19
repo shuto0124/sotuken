@@ -187,19 +187,26 @@
     }
 
     // メンバーリストを更新する
-    function updateMemberList(members) {
-
-        for (let i = 1; i <= 4; i++) {
-
-            const memberElement = document.getElementById('member-' + i);
-
-            if (i <= members.length) {
-                memberElement.textContent = members[i - 1].userName;
-            } else {
-                memberElement.textContent = '空き';
-            }
-
-        }
+	function updateMemberList(members) {
+	
+	    for (let i = 1; i <= 4; i++) {
+	
+	        const memberElement = document.getElementById('member-' + i);
+	
+	        if (i <= members.length) {
+	
+	            const member = members[i - 1];
+	
+	            if (member.isRepresentative) {
+	                memberElement.textContent = member.userName + ' ★';
+	            } else {
+	                memberElement.textContent = member.userName;
+	            }
+	
+	        } else {
+	            memberElement.textContent = '空き';
+	        }
+	    }
 
         // メンバー数に応じてボタンの状態も更新
         updateLeaveButtonState();
