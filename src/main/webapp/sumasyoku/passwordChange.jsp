@@ -122,11 +122,6 @@
             return false;
         }
 
-        // 3. パスワードの文字数チェック（例として8文字以上）
-        if (newPassword.length < 8) {
-            alert('新しいパスワードは8文字以上で入力してください。');
-            return false;
-        }
 
         // 4. 確認ダイアログ
         return confirm('パスワードを変更しますか？');
