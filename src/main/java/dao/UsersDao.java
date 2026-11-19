@@ -221,9 +221,9 @@ public class UsersDao extends Dao {
 				statement.setString(3, users.getPassword());
 				statement.setString(4, users.getAccountStatus());
 				if (users.getGroups() != null) {
-				    statement.setInt(4, users.getGroups().getGroupNumber());
+				    statement.setInt(5, users.getGroups().getGroupNumber());
 				} else {
-				    statement.setNull(4, java.sql.Types.INTEGER);
+				    statement.setNull(5, java.sql.Types.INTEGER);
 				}
 			//存在する 更新
 			} else {
