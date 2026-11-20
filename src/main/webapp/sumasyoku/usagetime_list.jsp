@@ -22,8 +22,8 @@
                     <label class="text-center h2 my-4">テーブルの利用時間</label>
                     <div class="text-center mb-2 h2 my-4">
                         <c:choose>
-                            <c:when test="${not empty manegements.reservationDuration}">
-                            現在の設定時間:${manegements.reservationDuration}分
+                            <c:when test="${not empty management.reservationDuration}">
+                            現在の設定時間:${management.reservationDuration}分
                             </c:when>
                             <c:otherwise>
                                 現在は設定されていません
@@ -32,8 +32,8 @@
                     </div>
                     <div class="col-3">
                        <div class="input-group">
-                        <input type="text" name="reservation_duration" class="form-control"
-                               value="${manegements.reservationDuration}" required>
+                        <input type="text" name="reservationDuration" class="form-control"
+                               value="${management.reservationDuration}" required>
                         <span class="input-group-text">分</span>
                        </div>
                     </div>
@@ -42,27 +42,24 @@
                <div class="mb-3 row justify-content-center">
                 <label class="text-center my-4 h2">システムの利用時間</label>
                     <div class="col-5 d-flex ">
-                       <input type="text" name="system_starttime" class="form-control"
-                               value="${manegements.systemStartTime}" required>
+                       <input type="time" name="systemStarttime" class="form-control"
+                               value="${management.systemStartTime}" required>
                                <span class="input-group-text">時</span>
                                
                                <span class="mx-2 mt-2">～</span>
                                
-                       <input type="text" name="system_endtime" class="form-control"
-                               value="${manegements.systemEndTime}" required>
+                       <input type="time" name="systemEndtime" class="form-control"
+                               value="${management.systemEndTime}" required>
                                <span class="input-group-text">時</span>                       
                     </div>
                 </div>
  
                 <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 30px;">
-                    <a class="btn btn-primary btn-lg my-4 py-4 fs-4" style="width:200px; padding-top: 10px; padding-bottom: 10px;">登録</a>
-                    <a class="btn btn-primary btn-lg  py-4 fs-4" style="width:200px; padding-top: 10px; padding-bottom: 10px;">戻る</a>
+                    <button type="submit" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">登録</button>
                 </div>
-
-
                 
-                <div class="d-flex justify-content-center">
-                     
+                <div class="d-flex justify-content-center" style="margin-top: 30px;">
+                     <a href="Managements.action" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">戻る</a>
                 </div>
             </form>
         </div>

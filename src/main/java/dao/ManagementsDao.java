@@ -110,7 +110,7 @@ public class ManagementsDao extends Dao {
 			statement = connection.prepareStatement("select * from managements where setting_number=?");
 			statement.setInt(1, 1);
 			ResultSet rSet = statement.executeQuery();
-			statement.close();
+
 			if (!rSet.next()) {
 				createSetting();
 			}
@@ -120,6 +120,9 @@ public class ManagementsDao extends Dao {
 			Time time = rSet.getTime("system_end_time");
 			manage.setSystemEndTime(time != null ? time.toLocalTime() : null);
 			manage.setReservationDuration(rSet.getInt("reservation_duration"));
+			
+			rSet.close();
+			statement.close();
 			
 			statement = connection.prepareStatement(
 					"update managements set system_start_time=?, system_end_time=?,"
@@ -168,7 +171,7 @@ public class ManagementsDao extends Dao {
 			statement = connection.prepareStatement("select * from managements where setting_number=?");
 			statement.setInt(1, 1);
 			ResultSet rSet = statement.executeQuery();
-			statement.close();
+
 			if (!rSet.next()) {
 				createSetting();
 			}
@@ -178,6 +181,9 @@ public class ManagementsDao extends Dao {
 			manage.setSystemStartTime(time != null ? time.toLocalTime() : null);
 			manage.setSystemEndTime(endTime);
 			manage.setReservationDuration(rSet.getInt("reservation_duration"));
+			
+			rSet.close();
+			statement.close();
 			
 			statement = connection.prepareStatement(
 					"update managements set system_start_time=?, system_end_time=?,"
@@ -227,7 +233,7 @@ public class ManagementsDao extends Dao {
 			statement = connection.prepareStatement("select * from managements where setting_number=?");
 			statement.setInt(1, 1);
 			ResultSet rSet = statement.executeQuery();
-			statement.close();
+
 			if (!rSet.next()) {
 				createSetting();
 			}
@@ -238,6 +244,9 @@ public class ManagementsDao extends Dao {
 			time = rSet.getTime("system_end_time");
 			manage.setSystemEndTime(time != null ? time.toLocalTime() : null);
 			manage.setReservationDuration(durationTime);
+			
+			rSet.close();
+			statement.close();
 			
 			statement = connection.prepareStatement(
 					"update managements set system_start_time=?, system_end_time=?,"
