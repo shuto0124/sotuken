@@ -32,4 +32,4 @@
 	<button type="submit">更新</button>
 </form>
 
-<button type="button" onclick="location.href='ProductsManagement.action'">戻る</button>
+<button type="button" onclick="location.href='ProductManagement.action'">戻る</button>
