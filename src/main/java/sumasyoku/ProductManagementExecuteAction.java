@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import tool.Action;
 
-public class ProductsManagementExecuteAction extends Action {
+public class ProductManagementExecuteAction extends Action {
     public void execute(
         HttpServletRequest req, HttpServletResponse res
     ) throws Exception {
