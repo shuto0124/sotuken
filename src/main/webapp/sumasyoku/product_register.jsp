@@ -74,7 +74,7 @@
                         <tr>
                             <td>
                                 <button type="button"
-                                        onclick="location.href='product_management.jsp'"
+                                        onclick="location.href='ProductManagement.action'"
                                         style="width:120px;height:50px;">
                                     戻る
                                 </button>
