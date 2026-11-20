@@ -1,10 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商品削除完了</title>
+</head>
 
-<div class="card-header text-center py-3" style="background-color: #f0f0f0;">
-<h1>削除完了</h1>
-</div>
- 
- <!-- No1: トップボタン -->
-<div class="text-center">
-<button type="button" onclick="location.href='Managements.action'">管理</button>
-</div>
+<body>
+
+<table border="1" align="center" width="600" height="500">
+
+<tr>
+<td align="center">
+
+<h1>商品削除完了</h1>
+
+<br><br><br>
+
+<table border="1" width="350" height="100">
+<tr>
+<td align="center">
+商品を削除しました。
+</td>
+</tr>
+</table>
+
+<br><br><br>
+
+<form action="ProductsManagement.action">
+    <button type="submit"
+            style="width:150px;height:60px;">
+        商品管理へ戻る
+    </button>
+</form>
+
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>

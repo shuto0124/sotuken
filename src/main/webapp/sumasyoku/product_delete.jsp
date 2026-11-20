@@ -6,7 +6,7 @@
 <h1>商品削除</h1>
 </div>
  
-<form action="ProductDeleteExecute.action" method="post">
+<form action="ProductDeleteExecute.action" method="post" onsubmit="return confirm('「${product.productName}」を削除しますか？');">
  <input type="hidden" name="productNumber" value="${product.productNumber }">
  <div>
 	<p>
