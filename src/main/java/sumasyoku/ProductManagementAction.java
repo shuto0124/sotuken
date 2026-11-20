@@ -17,6 +17,6 @@ public class ProductsManagementAction extends Action {
         List<Products> productList = pDao.findAll();  
         
         req.setAttribute("productList", productList);
-        req.getRequestDispatcher("products_management.jsp").forward(req, res);
+        req.getRequestDispatcher("product_management.jsp").forward(req, res);
     }
 }  
