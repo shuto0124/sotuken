@@ -7,6 +7,6 @@
  <!-- No1: トップボタン -->
 <div class="text-center">
 
-<button type="button" onclick="location.href='ProductsManagement.action'">商品管理画面</button>
+<button type="button" onclick="location.href='ProductManagement.action'">商品管理画面</button>
 <button type="button" onclick="location.href='Managements.action'">管理画面</button>
 </div>
