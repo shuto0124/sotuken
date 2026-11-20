@@ -37,7 +37,7 @@ public class ProductsDao extends Dao {
 	//	詳細取得
 	public Products findByNumber(int productNumber) throws Exception{
 		Products product = null;
-		String sql = "SELECT product_number, product_name, product_image, product_description, product_price FROM PRODUCTS WHERE product_number = ?";
+		String sql = "SELECT product_number, product_name, product_image, product_description, product_price, product_stock FROM PRODUCTS WHERE product_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
@@ -52,6 +52,7 @@ public class ProductsDao extends Dao {
 					product.setProductImage(rs.getString("product_image"));
 					product.setProductDescription(rs.getString("product_description"));
 					product.setProductPrice(rs.getInt("product_price"));
+					product.setProductStock(rs.getInt("product_stock"));
 				}
 			}
 		}

@@ -6,7 +6,7 @@
 	<h1>商品更新</h1>
 </div>
 
-<form action="ProductUpdateExecute.action" method="post">
+<form action="ProductUpdateExecute.action" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="productNumber" value="${product.productNumber}">
 	<p>
 	商品名	：
@@ -15,7 +15,7 @@
 
 	<p>
 	商品説明：
-	<textarea name="productDescription" rows="4" cols="40">${product.description}></textarea>
+	<textarea name="productDescription" rows="4" cols="40">${product.productDescription}</textarea>
 	</p>
 
 	<p>
@@ -27,9 +27,9 @@
 	<img src="${pageContext.request.contextPath}/images/${product.productImage}"
 		 alt="ダミー画像" width="100" height="100">
 	<p class="mb-1"></p>
-	<input type="file" name="imgFile" accept="imgs/*">
+	<input type="file" name="productImage" accept="image/*">
 	</p>
 	<button type="submit">更新</button>
 </form>
 
-<button type="button" onclick="location.href='productManager.jsp'">戻る</button>
+<button type="button" onclick="location.href='ProductsManagement.action'">戻る</button>
