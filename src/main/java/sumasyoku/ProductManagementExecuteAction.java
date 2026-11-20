@@ -24,7 +24,7 @@ public class ProductManagementExecuteAction extends Action {
         
         old.setProductStock(productStockNumber);
         dao.save(old);
-        res.sendRedirect("ProductsManagement.action");
+        res.sendRedirect("ProductManagement.action");
         
         
     }
