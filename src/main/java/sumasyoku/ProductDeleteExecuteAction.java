@@ -15,7 +15,7 @@ public class ProductDeleteExecuteAction extends Action{
 		Products product= pDao.findByNumber(productNumber);
         if (product == null) {
             req.setAttribute("msg", "対象の商品が見つかりません");
-            req.getRequestDispatcher("ProductsManagement.action").forward(req, res);
+            req.getRequestDispatcher("ProductManagement.action").forward(req, res);
             return;
         }
         String image = product.getProductImage();
