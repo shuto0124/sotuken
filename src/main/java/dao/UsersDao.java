@@ -31,6 +31,7 @@ public class UsersDao extends Dao {
 				users.setAccountStatus(rSet.getString("account_status"));
 				  
 				users.setGroups(groupsDao.get(rSet.getInt("group_number")));
+				users.setCurrentPage(rSet.getString("current_page"));
 			} else {
 				users = null;
 			}
@@ -76,6 +77,7 @@ public class UsersDao extends Dao {
 				users.setAccountStatus(rSet.getString("account_status"));
 				  
 				users.setGroups(groupsDao.get(rSet.getInt("group_number")));
+				users.setCurrentPage(rSet.getString("current_page"));
 			} else {
 				users = null;
 			}
@@ -121,7 +123,7 @@ public class UsersDao extends Dao {
 				users.setAccountStatus(rSet.getString("account_status"));
 				  
 				users.setGroups(groupsDao.get(rSet.getInt("group_number")));
-				
+				users.setCurrentPage(rSet.getString("current_page"));
 				list.add(users);
 			}
 			
@@ -171,6 +173,7 @@ public class UsersDao extends Dao {
 				users.setAccountStatus(rSet.getString("account_status"));
 				  
 				users.setGroups(groupsDao.get(rSet.getInt("group_number")));
+				users.setCurrentPage(rSet.getString("current_page"));
 				
 				list.add(users);
 			}
@@ -199,6 +202,54 @@ public class UsersDao extends Dao {
 	
 		return list;
 	}
+	
+	public boolean currentPageUpdate(Users users,String page) throws Exception {
+		Connection connection = getConnection();
+		PreparedStatement statement = null;
+		int count = 0;
+		
+		try {
+			statement = connection.prepareStatement(
+					"update users set current_page=? where user_number=?");
+			statement.setString(1, (page));
+			statement.setInt(2, users.getUserNumber());
+
+			count = statement.executeUpdate();		
+			
+		} catch (Exception e) {
+			throw e;
+		} finally {
+			if (statement != null) {
+				try {
+					statement.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+			
+			if (connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException sqle) {
+					throw sqle;
+				}
+			}
+		} 
+		 
+		if (count > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//-------------------------passwordの保存方法(セキュリティ面)改善が必要
 	

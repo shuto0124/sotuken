@@ -7,6 +7,7 @@ public class Users implements java.io.Serializable {
 	private String password;
 	private String accountStatus;
 	private Groups groups;
+	private String 	currentPage;
 	
 	public int getUserNumber() {
 		return userNumber;
@@ -28,6 +29,11 @@ public class Users implements java.io.Serializable {
 		return groups;
 	}
 	
+	public String getCurrentPage() {
+		return currentPage;
+	}
+	
+	
 	public void setUserNumber(int userNumber) {
 		this.userNumber = userNumber;
 	}
@@ -46,6 +52,10 @@ public class Users implements java.io.Serializable {
 	
 	public void setGroups(Groups groups) {
 		this.groups = groups;
+	}
+	
+	public void setCurrentPage(String currentPage) {
+		this.currentPage = currentPage;
 	}
 
 }
