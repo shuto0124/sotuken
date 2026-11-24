@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,129 +18,34 @@
 
 <br>
 
-<table>
+<c:if test="${empty product}">
+    <p>商品がありません。</p>
+</c:if>
 
-<tr>
+<div style="display:flex; flex-wrap:wrap; gap:40px; width:420px; margin:auto;">
 
-<td align="center">
-<form action="productDetail.jsp">
-<input type="hidden" name="id" value="1">
+  <c:forEach var="product" items="${product}">
 
-<button type="submit"
-        style="width:180px;height:180px;">
+      <form action="ProductDetail.action">
+      
+          <input type="hidden" name="id" value="${product.productNumber}">
+        
+          <button type="submit" style="width:180px;height:180px;">
+          
+              <img alt="${product.productName}" src="/スマ食/images/${product.productImage}" width="80" height="80" >
+            
+              <br><br>
+            
 
-<img src="../images/productA.jpg"
-     width="80"
-     height="80"
-     alt="商品A">
-
-<br><br>
-
-商品A
-
-<br><br>
-
-500円
-
-</button>
-
-</form>
-</td>
-
-<td width="30"></td>
-
-<td align="center">
-<form action="productDetail.jsp">
-<input type="hidden" name="id" value="2">
-
-<button type="submit"
-        style="width:180px;height:180px;">
-
-<img src="../images/productB.jpg"
-     width="80"
-     height="80"
-     alt="商品B">
-
-<br><br>
-
-商品B
-
-<br><br>
-
-300円
-
-</button>
-
-</form>
-</td>
-
-</tr>
-
-<tr>
-<td colspan="3">
-<br>
-</td>
-</tr>
-
-<tr>
-
-<td align="center">
-<form action="productDetail.jsp">
-<input type="hidden" name="id" value="3">
-
-<button type="submit"
-        style="width:180px;height:180px;">
-
-<img src="../images/productC.jpg"
-     width="80"
-     height="80"
-     alt="商品C">
-
-<br><br>
-
-商品C
-
-<br><br>
-
-700円
-
-</button>
-
-</form>
-</td>
-
-<td></td>
-
-<td align="center">
-<form action="productDetail.jsp">
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<input type="hidden" name="id" value="4">
-
-<button type="submit"
-        style="width:180px;height:180px;">
-
-<img src="../images/productD.jpg"
-     width="80"
-     height="80"
-     alt="商品D">
-
-<br><br>
-
-商品D
-
-<br><br>
-
-400円
-
-</button>
-
-</form>
-</td>
-
-</tr>
-
-</table>
-
+              ${product.productName}
+            
+              <br><br>
+            
+              ${product.productPrice}円
+         </button>
+      </form>
+  </c:forEach>
+</div>
 <br><br>
 
 <table>
@@ -156,7 +62,7 @@
     </c:when>
 
     <c:when test="${backPage == 'reservation'}">
-        <form action="reserve_type.jsp" method="get">
+        <form action="ReserveTypeSelect.action" method="get">
             <button type="submit"
              style="width:130px;height:50px;font-size:20px;">戻る</button>
         </form>
@@ -167,7 +73,7 @@
 <td width="80"></td>
 
 <td>
-<form action="reservation.jsp">
+<form action="Reservation.action">
 
 <button type="submit"
         style="width:130px;height:50px;font-size:20px;">
