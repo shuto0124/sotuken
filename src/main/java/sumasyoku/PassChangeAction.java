@@ -57,6 +57,6 @@ public class PassChangeAction extends Action {
             }
         }
 
-        req.getRequestDispatcher("passhen.jsp").forward(req, res);
+        req.getRequestDispatcher("passwordChange.jsp").forward(req, res);
     }
 }
