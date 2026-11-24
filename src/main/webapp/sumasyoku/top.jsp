@@ -10,7 +10,7 @@
 	<button type="button" onclick="location.href='menu.jsp'">メニュー</button>
     </div>
     <div class="text-center">
-    <button type="button" onclick="location.href='reserve_type.jsp'">予約</button>
+    <button type="button" onclick="location.href='ReserveTypeSelect.action'">予約</button>
     </div>
     <div class="text-center">
     <button type="button" onclick="location.href='Group.action'">グループ</button>
