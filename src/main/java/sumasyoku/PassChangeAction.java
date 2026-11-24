@@ -27,13 +27,13 @@ public class PassChangeAction extends Action {
         if (currentPassword != null && newPassword != null && confirmPassword != null) {
             if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
                 req.setAttribute("error", "すべての項目を入力してください。");
-                req.getRequestDispatcher("passhen.jsp").forward(req, res);
+                req.getRequestDispatcher("passwordChange.jsp").forward(req, res);
                 return;
             }
 
             if (!newPassword.equals(confirmPassword)) {
                 req.setAttribute("error", "新しいパスワードと確認用パスワードが一致しません。");
-                req.getRequestDispatcher("passhen.jsp").forward(req, res);
+                req.getRequestDispatcher("passwordChange.jsp").forward(req, res);
                 return;
             }
 
@@ -42,7 +42,7 @@ public class PassChangeAction extends Action {
 
             if (dbUser == null || dbUser.getPassword() == null || !currentPassword.equals(dbUser.getPassword())) {
                 req.setAttribute("error", "現在のパスワードが間違っています。");
-                req.getRequestDispatcher("passhen.jsp").forward(req, res);
+                req.getRequestDispatcher("passwordChange.jsp").forward(req, res);
                 return;
             }
 
