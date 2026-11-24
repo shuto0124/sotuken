@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>パスワード変更画面</title>
     <style>
-        /* 画面全体のレイアウト調整 */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -67,6 +66,18 @@
         .btn-back:hover, .btn-submit:hover {
             background-color: #fff9c4;
         }
+        .msg-error {
+            color: #d32f2f;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .msg-success {
+            color: #2e7d32;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -74,26 +85,29 @@
 <div class="screen-container">
     <h2>パスワード変更</h2>
 
-    <form id="passwordForm" onsubmit="return validateForm()">
-        <!-- 現在のパスワード -->
+    <% if (request.getAttribute("error") != null) { %>
+        <div class="msg-error"><%= request.getAttribute("error") %></div>
+    <% } %>
+    <% if (request.getAttribute("message") != null) { %>
+        <div class="msg-success"><%= request.getAttribute("message") %></div>
+    <% } %>
+
+    <form id="passwordForm" action="PassChange.action" method="post" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="currentPassword">現在のパスワード</label>
             <input type="password" id="currentPassword" name="currentPassword" class="password-input" placeholder="現在のパスワード">
         </div>
 
-        <!-- 新しいパスワード -->
         <div class="form-group">
             <label for="newPassword">新しいパスワード</label>
             <input type="password" id="newPassword" name="newPassword" class="password-input" placeholder="新しいパスワード">
         </div>
 
-        <!-- 新しいパスワード（確認） -->
         <div class="form-group">
             <label for="confirmPassword">新しいパスワード（確認）</label>
             <input type="password" id="confirmPassword" name="confirmPassword" class="password-input" placeholder="新しいパスワード">
         </div>
 
-        <!-- 画面下部のボタン -->
         <div class="button-group">
             <button type="button" class="btn-back" onclick="goBack()">戻る</button>
             <button type="submit" class="btn-submit">変更</button>
@@ -102,34 +116,24 @@
 </div>
 
 <script>
-    /**
-     * 変更ボタン押下時のJavaScriptバリデーションチェック
-     */
     function validateForm() {
         const currentPassword = document.getElementById('currentPassword').value;
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
-        // 1. 空欄チェック
         if (!currentPassword || !newPassword || !confirmPassword) {
             alert('すべての項目を入力してください。');
             return false;
         }
 
-        // 2. 新しいパスワードと確認用の一致チェック
         if (newPassword !== confirmPassword) {
             alert('新しいパスワードと確認用パスワードが一致しません。');
             return false;
         }
 
-
-        // 4. 確認ダイアログ
         return confirm('パスワードを変更しますか？');
     }
 
-    /**
-     * 戻る
-     */
     function goBack() {
         history.back();
     }

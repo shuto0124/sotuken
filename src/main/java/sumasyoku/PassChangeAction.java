@@ -1,10 +1,10 @@
 package sumasyoku;
 
+import bean.Users;
+import dao.UsersDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import bean.Users;
-import dao.UsersDao;
 import tool.Action;
 
 public class PassChangeAction extends Action {
@@ -12,23 +12,51 @@ public class PassChangeAction extends Action {
     public void execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
         req.setCharacterEncoding("UTF-8");
 
-        String currentPass = req.getParameter("currentPass");
-        String newPass = req.getParameter("newPass");
+        String currentPassword = req.getParameter("currentPassword");
+        String newPassword = req.getParameter("newPassword");
+        String confirmPassword = req.getParameter("confirmPassword");
 
-        if (currentPass != null && newPass != null) {
+        HttpSession session = req.getSession();
+        Users sessionUser = (Users) session.getAttribute("user");
+
+        if (sessionUser == null) {
+            res.sendRedirect("login.jsp");
+            return;
+        }
+
+        if (currentPassword != null && newPassword != null && confirmPassword != null) {
+            if (currentPassword.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()) {
+                req.setAttribute("error", "すべての項目を入力してください。");
+                req.getRequestDispatcher("passhen.jsp").forward(req, res);
+                return;
+            }
+
+            if (!newPassword.equals(confirmPassword)) {
+                req.setAttribute("error", "新しいパスワードと確認用パスワードが一致しません。");
+                req.getRequestDispatcher("passhen.jsp").forward(req, res);
+                return;
+            }
+
             UsersDao dao = new UsersDao();
-            Users sessionUser = (Users) req.getSession().getAttribute("user");
             Users dbUser = dao.get(sessionUser.getUserNumber());
 
-            if (dbUser == null || !currentPass.equals(dbUser.getPassword())) {
-                req.setAttribute("error", "現在のパスワードが間違っています");
+            if (dbUser == null || dbUser.getPassword() == null || !currentPassword.equals(dbUser.getPassword())) {
+                req.setAttribute("error", "現在のパスワードが間違っています。");
+                req.getRequestDispatcher("passhen.jsp").forward(req, res);
+                return;
+            }
+
+            dbUser.setPassword(newPassword);
+            boolean updated = dao.save(dbUser);
+
+            if (updated) {
+                session.setAttribute("user", dao.get(sessionUser.getUserNumber()));
+                req.setAttribute("message", "パスワードを変更しました。");
             } else {
-                dao.updatePassword(dbUser, newPass);
-                req.getSession().setAttribute("user", dao.get(sessionUser.getUserNumber()));
-                req.setAttribute("message", "パスワードを変更しました");
+                req.setAttribute("error", "パスワードの変更に失敗しました。");
             }
         }
 
-        req.getRequestDispatcher("passwordchange.jsp").forward(req, res);
+        req.getRequestDispatcher("passhen.jsp").forward(req, res);
     }
 }
