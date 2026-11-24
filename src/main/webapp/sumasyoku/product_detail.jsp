@@ -112,7 +112,7 @@ if ("1".equals(id)) {
 
 
 
-<form action="productList.jsp">
+<form action="productList.action">
 
 <button type="submit"
         style="width:130px;height:50px;font-size:20px;">
