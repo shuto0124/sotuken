@@ -7,7 +7,7 @@
 
 <div class="card-body p-4 bg-white">
 	<div class="text-center">
-	<button type="button" onclick="location.href='menu.jsp'">メニュー</button>
+	<button type="button" onclick="location.href='Menu.action'">メニュー</button>
     </div>
     <div class="text-center">
     <button type="button" onclick="location.href='ReserveTypeSelect.action'">予約</button>
