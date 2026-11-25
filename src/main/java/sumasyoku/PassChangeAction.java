@@ -10,7 +10,7 @@ public class PassChangeAction extends Action {
         ) throws Exception {
     	
     	
-        req.getRequestDispatcher("pass_change.jsp")
+        req.getRequestDispatcher("password_change.jsp")
            .forward(req, res);
     }
 }

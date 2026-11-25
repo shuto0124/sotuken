@@ -52,8 +52,11 @@ public class PassChangeExecuteAction extends Action {
             boolean updated = dao.save(dbUser);
 
             if (updated) {
-                session.setAttribute("user", dao.get(sessionUser.getUserNumber()));
-                req.setAttribute("message", "パスワードを変更しました。");
+                session.setAttribute("user", dao.get(sessionUser.getUserNumber()));   
+                session.setAttribute("flashMessage", "パスワードを変更しました。");
+                
+                res.sendRedirect("top.jsp");
+                return;
             } else {
                 req.setAttribute("error", "パスワードの変更に失敗しました。");
             }

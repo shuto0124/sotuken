@@ -19,7 +19,7 @@
     <button type="button" onclick="location.href='reserveConfi.jsp'">予約状況確認</button>
     </div>
     <div class="text-center">                        
-    <button type="button" onclick="location.href='password_change.jsp'">パスワードの変更</button>
+    <button type="button" onclick="location.href='PassChange.action'">パスワードの変更</button>
     </div>
     <div class="text-center">                        
     	<form action="LogoutExecute.action" method="post" onsubmit="return confirm('ログアウトしますか');">
@@ -27,3 +27,17 @@
     	</form>   
     </div>
 </div>         
+
+<%
+    String flashMessage = (String) session.getAttribute("flashMessage");
+    if (flashMessage != null) {
+        session.removeAttribute("flashMessage");
+%>
+<script>
+    window.addEventListener('DOMContentLoaded', function() {
+        alert("<%= flashMessage %>");
+    });
+</script>
+<%
+    }
+%>

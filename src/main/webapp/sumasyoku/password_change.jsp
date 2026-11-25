@@ -92,7 +92,7 @@
         <div class="msg-success"><%= request.getAttribute("message") %></div>
     <% } %>
 
-    <form id="passwordForm" action="PassChange.action" method="post" onsubmit="return validateForm()">
+    <form id="passwordForm" action="PassChangeExecute.action" method="post" onsubmit="return validateForm()">
         <div class="form-group">
             <label for="currentPassword">現在のパスワード</label>
             <input type="password" id="currentPassword" name="currentPassword" class="password-input" placeholder="現在のパスワード">
