@@ -23,6 +23,7 @@ public class ProductListAction extends Action {
         List<Products> product = productDao.findAll();
         
         
+//    	ここからうえ-----------------------------------------
     	 
          
          Users users=(Users)session.getAttribute("user");
