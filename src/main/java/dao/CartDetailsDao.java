@@ -21,7 +21,7 @@ public class CartDetailsDao extends Dao {
 							cd.cart_number,
 							cd.product_number,
 							cd.quantity,
-							COALESCE(cd.cart_subtotal, (p.product_price * cd.quantity)),
+							COALESCE(cd.cart_subtotal, (p.product_price * cd.quantity)) AS cart_subtotal,
 							p.product_name,
 							p.product_price
 						FROM CART_DETAILS cd
