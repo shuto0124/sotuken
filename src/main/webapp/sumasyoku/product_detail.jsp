@@ -102,7 +102,7 @@ ${product.productDescription}
 
 <form action="addCart.jsp" method="post">
 
-    <input type="hidden" name="id" value="${product.productNumber}">
+    <input type="hidden" name="productNumber" value="${product.productNumber}">
 
 <c:if test="${backPage != 'menu'}">
   <button type="submit"
