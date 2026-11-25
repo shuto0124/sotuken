@@ -44,37 +44,12 @@
     gap: 12px;
   }
 
-  .header-left {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
-    min-width: 0;
-  }
-
   .card-header h1 {
     margin: 0;
     font-size: 1.55rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     line-height: 1.2;
-  }
-
-  .user-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: rgba(255, 253, 249, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    color: #ffffff;
-    font-size: 0.85rem;
-    font-weight: 700;
-    padding: 3px 10px;
-    border-radius: 999px;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
 
   .top-logout-form {
@@ -222,8 +197,13 @@
 </style>
 
 <!-- No1: 画面タイトル -->
-<div class="card-header text-center py-3"">
-<h1>トップ</h1>
+<div class="card-header">
+  <div class="top-header-bar">
+    <h1>トップ</h1>
+    <form action="LogoutExecute.action" method="post" class="top-logout-form" onsubmit="return confirm('ログアウトしますか');">
+      <button type="submit" class="btn-top-logout">ログアウト</button>
+    </form>
+  </div>
 </div>
 
 <div class="card-body p-4 bg-white">
@@ -242,15 +222,7 @@
     <div class="text-center">                        
     <button type="button" onclick="location.href='PassChange.action'">パスワードの変更</button>
     </div>
-    <div class="text-center">                        
-    	<form action="LogoutExecute.action" method="post" onsubmit="return confirm('ログアウトしますか');">
-    		<button type="submit">ログアウト</button>
-    	</form>   
-    </div>
-
 </div>
-
-         
 
 <%
     String flashMessage = (String) session.getAttribute("flashMessage");
