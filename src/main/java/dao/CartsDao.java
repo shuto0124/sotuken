@@ -64,7 +64,7 @@ public class CartsDao extends Dao {
 						UPDATE CARTS 
 					    SET cart_total = COALESCE((
 					        SELECT SUM(p.product_price * cd.quantity) 
-					        FROM CARTDETAILS cd 
+					        FROM CART_DETAILS cd 
 					        JOIN PRODUCTS p ON cd.product_number = p.product_number 
 					        WHERE cd.cart_number = ? 
 					    ), 0) 
