@@ -28,9 +28,11 @@
 
       <form action="ProductDetail.action">
       
-          <input type="hidden" name="id" value="${product.productNumber}">
+          <input type="hidden" name="product_number" value="${product.productNumber}">
+          
+          <input type="hidden" name="backPage" value="${backPage}">
         
-          <button type="submit" style="width:180px;height:180px;">
+          <button type="submit" style="width:180px;height:200px;">
           
               <img alt="${product.productName}" src="/スマ食/images/${product.productImage}" width="80" height="80" >
             
@@ -42,6 +44,12 @@
               <br><br>
             
               ${product.productPrice}円
+              
+              <br><br>
+            
+              ${product.productStock}個
+              
+              
          </button>
       </form>
   </c:forEach>
@@ -67,13 +75,20 @@
              style="width:130px;height:50px;font-size:20px;">戻る</button>
         </form>
     </c:when>
+    
+    <c:when test="${backPage == 'menu'}">
+        <form action="Top.action" method="get">
+            <button type="submit"
+             style="width:130px;height:50px;font-size:20px;">戻る</button>
+        </form>
+    </c:when>
 </c:choose>
 </td>
 
 <td width="80"></td>
 
 <td>
-<form action="Reservation.action">
+<form action="reservation.jsp">
 
 <button type="submit"
         style="width:130px;height:50px;font-size:20px;">

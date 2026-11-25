@@ -21,10 +21,10 @@ public class CartDetailsDao extends Dao {
 							cd.cart_number,
 							cd.product_number,
 							cd.quantity,
-							COALESCE(cd.cart_subtotal, (p.product_price * cd.quantity)) AS 	subtotal,
+							COALESCE(cd.cart_subtotal, (p.product_price * cd.quantity)),
 							p.product_name,
-							p.product_price,
-						FROM CARTDETAILS cd
+							p.product_price
+						FROM CART_DETAILS cd
 						JOIN PRODUCTS p ON cd.product_number = p.product_number
 						WHERE cd.cart_number = ?
 						ORDER BY cd.cart_detail_number ASC
@@ -60,7 +60,7 @@ public class CartDetailsDao extends Dao {
 	
 	//	保存
 	public boolean save(int cartNumber, int productNumber, int count) throws Exception {
-		String checkSql = "SELECT cart_detail_number, quantity FROM CARTDETAILS WHERE cart_number = ? AND product_number = ?";
+		String checkSql = "SELECT cart_detail_number, quantity FROM CART_DETAILS WHERE cart_number = ? AND product_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement checkSt = con.prepareStatement(checkSql)) {
@@ -75,8 +75,8 @@ public class CartDetailsDao extends Dao {
 					return updateQuantity(detailNumber, newQuantity);
 				} else {
 					String insertSql = """
-											INSERT INTO CARTDETAILS (cart_number, product_number, quantity, cart_subtotal)
-											VALUES (?, ?, ?, (SELECT product_price FROM PRODUCTS WHERE product_number - ?) * ?)
+											INSERT INTO CART_DETAILS (cart_number, product_number, quantity, cart_subtotal)
+											VALUES (?, ?, ?, (SELECT product_price FROM PRODUCTS WHERE product_number = ?) * ?)
 									   """;
 					try (PreparedStatement insertSt = con.prepareStatement(insertSql)) {
 						insertSt.setInt(1, cartNumber);
@@ -95,10 +95,10 @@ public class CartDetailsDao extends Dao {
 	//	数量の変更
 	public boolean updateQuantity(int cartDetailNumber, int newQuantity) throws Exception {
 		String sql = """
-						UPDATE CARTDETAILS cd
+						UPDATE CART_DETAILS cd
 						SET quantity = ?,
 							cart_subtotal = (
-								SELECT p.product_prce * ?
+								SELECT p.product_price * ?
 								FROM PRODUCTS p
 								WHERE p.product_number = cd.product_number
 							)
@@ -118,7 +118,7 @@ public class CartDetailsDao extends Dao {
 	
 	//	削除(単一)
 	public boolean delete(int cartDetialNumber) throws Exception {
-		String sql = "DELETE FROM CARTDETAILS WHERE cart_detail_number = ?";
+		String sql = "DELETE FROM CART_DETAILS WHERE cart_detail_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {
@@ -131,7 +131,7 @@ public class CartDetailsDao extends Dao {
 	
 	//	削除(全体)
 	public boolean deleteAllByCartNumber(int cartNumber) throws Exception {
-		String sql = "DELETE FROM CARTDETAILS WHERE cart_number = ?";
+		String sql = "DELETE FROM CART_DETAILS WHERE cart_number = ?";
 		
 		try (Connection con = getConnection();
 			 PreparedStatement st = con.prepareStatement(sql)) {

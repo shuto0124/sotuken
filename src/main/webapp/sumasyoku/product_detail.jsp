@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,44 +11,7 @@
 
 <body>
 
-<%
 
-
-String id = request.getParameter("id");
-
-
-String name = "";
-String image = "";
-String description = "";
-
-
-if ("1".equals(id)) {
-
-    name = "商品A";
-    image = "../images/productA.jpg";
-    description = "商品Aの説明です。";
-
-} else if ("2".equals(id)) {
-
-    name = "商品B";
-    image = "../images/productB.jpg";
-    description = "商品Bの説明です。";
-
-} else if ("3".equals(id)) {
-
-    name = "商品C";
-    image = "../images/productC.jpg";
-    description = "商品Cの説明です。";
-
-} else if ("4".equals(id)) {
-
-    name = "商品D";
-    image = "../images/productD.jpg";
-    description = "商品Dの説明です。";
-
-}
-
-%>
 
 <table border="1" align="center" width="600" height="750">
 
@@ -63,7 +27,7 @@ if ("1".equals(id)) {
 <table border="1" width="450" height="100">
 <tr>
 <td align="center">
-<h2><%= name %></h2>
+<h2>${product.productName}</h2>
 </td>
 </tr>
 </table>
@@ -76,10 +40,10 @@ if ("1".equals(id)) {
 <tr>
 <td align="center">
 
-<img src="<%= image %>"
+<img src="/sotukenn/images/${product.productImage}"
      width="150"
      height="150"
-     alt="<%= name %>">
+     alt="${product.productName}">
 
 </td>
 </tr>
@@ -91,11 +55,13 @@ if ("1".equals(id)) {
 
 <table border="1" width="450" height="150">
 <tr>
-<td align="center">
+<td align="center" valign="top">
 
 <h3>商品説明</h3>
 
-<%= description %>
+<div>
+${product.productDescription}
+</div>
 
 </td>
 </tr>
@@ -110,18 +76,22 @@ if ("1".equals(id)) {
 
 <td>
 
+<c:choose>
 
-
-<form action="productList.action">
-
-<button type="submit"
-        style="width:130px;height:50px;font-size:20px;">
-
-戻る
-
-</button>
-
-</form>
+    <c:when test="${backPage == 'reservation'}">
+        <form action="ProductList.action" method="get">
+            <button type="submit"
+             style="width:130px;height:50px;font-size:20px;">戻る</button>
+        </form>
+    </c:when>
+    
+    <c:when test="${backPage == 'menu'}">
+        <form action="Menu.action" method="get">
+            <button type="submit"
+             style="width:130px;height:50px;font-size:20px;">戻る</button>
+        </form>
+    </c:when>
+</c:choose>
 
 </td>
 
@@ -130,19 +100,28 @@ if ("1".equals(id)) {
 <td>
 
 
-
 <form action="addCart.jsp" method="post">
 
-<input type="hidden" name="id" value="<%= id %>">
+    <input type="hidden" name="id" value="${product.productNumber}">
 
-<button type="submit"
-        style="width:150px;height:50px;font-size:18px;">
+<c:if test="${backPage != 'menu'}">
+  <button type="submit"
+          style="width:150px;height:60px;font-size:18px;" ${product.productStock == 0  ? 'disabled' : ''}>
 
-カートに入れる
+  カートに入れる
+  (残り:${product.productStock}個)
 
-</button>
+  </button>
+
+</c:if>
 
 </form>
+
+<c:if test="${backPage == 'menu'}">
+    <div style="width:150px;height:55px;font-size:30px;text-align:center;">
+        残り:${product.productStock}個
+    </div>
+</c:if>
 
 </td>
 
