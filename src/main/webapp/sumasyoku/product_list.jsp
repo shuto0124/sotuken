@@ -18,6 +18,10 @@
 
 <br>
 
+<a href="Cart.action" class="btn btn-primary position-fixed top-0 end-0 m-3">
+    🛒 カート
+</a>
+
 <c:if test="${empty product}">
     <p>商品がありません。</p>
 </c:if>
