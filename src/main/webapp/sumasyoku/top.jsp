@@ -80,6 +80,21 @@
     transform: translateY(1px);
   }
 
+  .msg-success {
+    max-width: 520px;
+    margin: 0 auto 14px;
+    background-color: #eef7f1;
+    color: #1f5938;
+    border: 1.5px solid #9bd0b0;
+    border-radius: 12px;
+    padding: 11px 14px;
+    font-size: 0.94rem;
+    font-weight: 700;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 4px 12px rgba(47, 122, 79, 0.08);
+  }
+
   .card-body {
     max-width: 520px;
     margin: 0 auto;
@@ -206,6 +221,16 @@
   </div>
 </div>
 
+<%
+    String flashMessage = (String) session.getAttribute("flashMessage");
+    if (flashMessage != null) {
+        session.removeAttribute("flashMessage");
+%>
+<div class="msg-success"><%= flashMessage %></div>
+<%
+    }
+%>
+
 <div class="card-body p-4 bg-white">
 	<div class="text-center">
 	<button type="button" onclick="location.href='Menu.action'">メニュー</button>
@@ -223,17 +248,3 @@
     <button type="button" onclick="location.href='PassChange.action'">パスワードの変更</button>
     </div>
 </div>
-
-<%
-    String flashMessage = (String) session.getAttribute("flashMessage");
-    if (flashMessage != null) {
-        session.removeAttribute("flashMessage");
-%>
-<script>
-    window.addEventListener('DOMContentLoaded', function() {
-        alert("<%= flashMessage %>");
-    });
-</script>
-<%
-    }
-%>

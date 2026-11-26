@@ -5,85 +5,157 @@
     <meta charset="UTF-8">
     <title>パスワード変更画面</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
         .screen-container {
-            width: 380px;
-            border: 2px solid #333;
-            background-color: #fff;
-            padding: 30px 20px;
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+            border: 1px solid var(--cafeteria-border);
+            background-color: var(--cafeteria-card);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(66, 46, 24, 0.08);
+            padding: 24px 20px;
             box-sizing: border-box;
             text-align: center;
         }
+
         h2 {
-            margin-top: 0;
-            margin-bottom: 25px;
-            font-size: 22px;
+            display: none;
         }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-align: left;
         }
+
         .form-group label {
             display: block;
-            text-align: center;
-            margin-bottom: 8px;
-            font-weight: bold;
-            font-size: 14px;
+            text-align: left;
+            margin-bottom: 7px;
+            font-weight: 800;
+            font-size: 0.92rem;
+            color: var(--cafeteria-ink);
         }
+
         .password-input {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #78909c;
-            background-color: #e3f2fd;
-            border-radius: 4px;
+            padding: 11px 12px;
+            border: 1.5px solid #d8cab6;
+            background-color: #ffffff;
+            color: var(--cafeteria-ink);
+            border-radius: 10px;
             box-sizing: border-box;
-            font-size: 14px;
+            font-size: 0.98rem;
+            font-family: inherit;
         }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--cafeteria-primary);
+            box-shadow: 0 0 0 3px rgba(217, 107, 39, 0.16);
+        }
+
         .button-group {
             display: flex;
             justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
+            margin-top: 24px;
+            gap: 12px;
         }
+
         .btn-back, .btn-submit {
             flex: 1;
-            padding: 10px;
-            border-radius: 4px;
+            padding: 11px 16px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
-            background-color: #fffde7;
-            border: 1px solid #fbc02d;
+            font-size: 0.98rem;
+            font-weight: 700;
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease, color 0.15s ease;
         }
-        .btn-back:hover, .btn-submit:hover {
-            background-color: #fff9c4;
+
+        .btn-back {
+            background-color: #faf7f2;
+            color: var(--cafeteria-muted);
+            border: 1.5px solid #d8cab6;
         }
+
+        .btn-back:hover {
+            background-color: #f1ebe1;
+            color: var(--cafeteria-ink);
+            transform: translateY(-1px);
+        }
+
+        .btn-back:active {
+            transform: translateY(1px);
+        }
+
+        .btn-submit {
+            background-color: var(--cafeteria-primary);
+            color: #ffffff;
+            border: 2px solid var(--cafeteria-primary);
+            border-bottom-width: 4px;
+            border-bottom-color: #9e430c;
+            box-shadow: 0 2px 6px rgba(43, 36, 29, 0.08);
+        }
+
+        .btn-submit:hover {
+            background-color: var(--cafeteria-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(43, 36, 29, 0.12);
+        }
+
+        .btn-submit:active {
+            transform: translateY(1px);
+        }
+
+        .btn-back:focus-visible,
+        .btn-submit:focus-visible {
+            outline: 3px solid #f2a93b;
+            outline-offset: 2px;
+        }
+
         .msg-error {
-            color: #d32f2f;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            background-color: var(--cafeteria-danger-bg);
+            color: var(--cafeteria-danger);
+            border: 1.5px solid var(--cafeteria-danger-border);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 16px;
         }
+
         .msg-success {
-            color: #2e7d32;
-            font-size: 13px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            background-color: #eef7f1;
+            color: #1f5938;
+            border: 1.5px solid #9bd0b0;
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .screen-container {
+                padding: 18px 14px;
+            }
+
+            .button-group {
+                flex-direction: column-reverse;
+            }
         }
     </style>
 </head>
 <body>
 
+<jsp:include page="../common/userbase.jsp">
+    <jsp:param name="title" value="パスワード変更" />
+    <jsp:param name="showLogout" value="false" />
+</jsp:include>
+
 <div class="screen-container">
     <h2>パスワード変更</h2>
+
+    <div id="clientErrorMsg" class="msg-error" style="display: none;"></div>
 
     <% if (request.getAttribute("error") != null) { %>
         <div class="msg-error"><%= request.getAttribute("error") %></div>
@@ -116,18 +188,32 @@
 </div>
 
 <script>
+    function showError(message) {
+        const errorBox = document.getElementById('clientErrorMsg');
+        errorBox.textContent = message;
+        errorBox.style.display = 'block';
+    }
+
+    function hideError() {
+        const errorBox = document.getElementById('clientErrorMsg');
+        errorBox.textContent = '';
+        errorBox.style.display = 'none';
+    }
+
     function validateForm() {
+        hideError();
+
         const currentPassword = document.getElementById('currentPassword').value;
         const newPassword = document.getElementById('newPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
 
         if (!currentPassword || !newPassword || !confirmPassword) {
-            alert('すべての項目を入力してください。');
+            showError('すべての項目を入力してください。');
             return false;
         }
 
         if (newPassword !== confirmPassword) {
-            alert('新しいパスワードと確認用パスワードが一致しません。');
+            showError('新しいパスワードと確認用パスワードが一致しません。');
             return false;
         }
 
