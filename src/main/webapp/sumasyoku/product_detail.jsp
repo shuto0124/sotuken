@@ -40,7 +40,7 @@
 <tr>
 <td align="center">
 
-<img src="/sotukenn/images/${product.productImage}"
+<img src="/スマ食/images/${product.productImage}"
      width="150"
      height="150"
      alt="${product.productName}">
