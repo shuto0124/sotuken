@@ -6,7 +6,9 @@
     <c:param name="scripts"></c:param>
     <c:param name="content">
       <div class="d-flex justify-content-end px-4 mt-3">
-          <a href="Logout.action" class="btn btn-danger">ログアウト</a>
+    	<form action="AdministratorLogoutExecute.action" method="post" onsubmit="return confirm('ログアウトしますか');">
+    		<button type="submit" class="btn btn-danger">ログアウト</button>
+    	</form>  
       </div>
       
 
