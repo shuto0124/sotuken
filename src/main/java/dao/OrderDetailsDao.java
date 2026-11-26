@@ -20,7 +20,7 @@ public class OrderDetailsDao extends Dao {
 		PreparedStatement statement = null;
 		
 		try {
-			statement = connection.prepareStatement("select * from orderdetails where orderdetails=?");
+			statement = connection.prepareStatement("select * from order_details where orderdetails=?");
 			statement.setInt(1, orderDetailNumber);
 			ResultSet rSet = statement.executeQuery();
 			ProductsDao pDao = new ProductsDao();
@@ -63,7 +63,7 @@ public class OrderDetailsDao extends Dao {
 		ResultSet rSet = null;
 		ProductsDao pDao = new ProductsDao();
 		try {
-			statement = connection.prepareStatement("select * from orderdetails where order_number=?");
+			statement = connection.prepareStatement("select * from order_details where order_number=?");
 			statement.setInt(1, orderNumber);
 			rSet = statement.executeQuery();
 			
@@ -114,7 +114,7 @@ public class OrderDetailsDao extends Dao {
 			int orderDetailNumber = random.nextInt(90000) + 10000;
 			try {
 				statement = connection.prepareStatement(
-						"select order_detail_number from orderdetails where order_detail_number=?");
+						"select order_detail_number from order_details where order_detail_number=?");
 				statement.setInt(1, orderDetailNumber);
 				ResultSet rSet = statement.executeQuery();
 				
@@ -130,7 +130,7 @@ public class OrderDetailsDao extends Dao {
 					oD.setOrderSubtotal(products.getProductPrice() * orderQuantity);
 					
 					statement = connection.prepareStatement(
-				"insert into orderdetails(order_detail_number,order_number,product_number,order_quantity,order_subtotal) values(?,?,?,?,?)");
+				"insert into order_details(order_detail_number,order_number,product_number,order_quantity,order_subtotal) values(?,?,?,?,?)");
 					
 					statement.setInt(1, oD.getOrderDetailNumber());
 					statement.setInt(2, oD.getOrderNumber());
