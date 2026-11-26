@@ -88,14 +88,17 @@
 <td width="80"></td>
 
 <td>
-<form action="reservation.jsp">
 
-<button type="submit"
-        style="width:130px;height:50px;font-size:20px;">
-注文
-</button>
+<c:choose>
+   <c:when test="${backPage != 'menu'}">
+        <form action="reservation.jsp" method="get">
+           <button type="submit" style="width:130px;height:50px;font-size:20px;">
+                  注文
+           </button>
+        </form>
+   </c:when>
+</c:choose>
 
-</form>
 </td>
 
 </tr>

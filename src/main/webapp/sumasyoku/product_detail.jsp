@@ -100,23 +100,59 @@ ${product.productDescription}
 <td>
 
 
-<form action="addCart.jsp" method="post">
+<form action="AddCart.action" method="post">
 
     <input type="hidden" name="productNumber" value="${product.productNumber}">
 
-<c:if test="${backPage != 'menu'}">
-  <button type="submit"
-          style="width:150px;height:60px;font-size:18px;" ${product.productStock == 0  ? 'disabled' : ''}>
+    <c:if test="${backPage != 'menu'}">
 
-  カートに入れる
-  (残り:${product.productStock}個)
+        <c:choose>
 
-  </button>
+            <c:when test="${product.productStock > 0}">
 
-</c:if>
+<div style="text-align:center; ">
+
+    <div style="margin-bottom:15px;">
+        数量：
+
+        <button type="button" onclick="decrease()">－</button>
+
+        <input type="number"
+               id="quantity"
+               name="quantity"
+               value="1"
+               min="1"
+               max="${product.productStock}"
+               style="width:50px;text-align:center;">
+
+        <button type="button" onclick="increase()">＋</button>
+    </div>
+
+    <button type="submit"
+            style="width:150px;height:60px;font-size:18px; ">
+        カートに入れる<br>
+        (残り:${product.productStock}個)
+    </button>
+
+</div>
+
+            </c:when>
+
+            <c:otherwise>
+
+                <button type="button"
+                        style="width:150px;height:60px;font-size:18px;"
+                        disabled>
+                    在庫切れ
+                </button>
+
+            </c:otherwise>
+
+        </c:choose>
+
+    </c:if>
 
 </form>
-
 <c:if test="${backPage == 'menu'}">
     <div style="width:150px;height:55px;font-size:30px;text-align:center;">
         残り:${product.productStock}個
@@ -135,3 +171,21 @@ ${product.productDescription}
 
 </body>
 </html>
+
+<script>
+function increase() {
+    const qty = document.getElementById("quantity");
+
+    if (parseInt(qty.value) < parseInt(qty.max)) {
+        qty.value = parseInt(qty.value) + 1;
+    }
+}
+
+function decrease() {
+    const qty = document.getElementById("quantity");
+
+    if (parseInt(qty.value) > parseInt(qty.min)) {
+        qty.value = parseInt(qty.value) - 1;
+    }
+}
+</script>
