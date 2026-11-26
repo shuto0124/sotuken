@@ -1,122 +1,211 @@
-
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
     <meta charset="UTF-8">
-
     <title>グループ画面</title>
-
     <style>
-
-        /* 画面全体のレイアウト調整 */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
         .screen-container {
-            width: 380px;
-            border: 2px solid #333;
-            background-color: #fff;
-            padding: 20px;
+            max-width: 520px;
+            width: 100%;
+            margin: 0 auto;
+            border: 1px solid var(--cafeteria-border);
+            background-color: var(--cafeteria-card);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(66, 46, 24, 0.08);
+            padding: 20px 18px;
             box-sizing: border-box;
             text-align: center;
         }
 
         h2 {
-            margin-top: 0;
-            margin-bottom: 20px;
-            font-size: 24px;
+            display: none;
+        }
+
+        .screen-container > p {
+            margin: 0 0 14px;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background-color: var(--cafeteria-danger-bg);
+            color: var(--cafeteria-danger);
+            border: 1.5px solid var(--cafeteria-danger-border);
+            font-size: 0.92rem;
+            font-weight: 700;
         }
 
         .top-action {
             display: flex;
             justify-content: center;
+            align-items: stretch;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         .group-id-input {
-            padding: 8px;
-            width: 60%;
-            border: 1px solid #78909c;
-            background-color: #e3f2fd;
-            border-radius: 4px;
+            padding: 10px 12px;
+            flex: 1;
+            min-width: 0;
+            border: 1.5px solid #d8cab6;
+            background-color: #ffffff;
+            color: var(--cafeteria-ink);
+            border-radius: 10px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .group-id-input:focus {
+            outline: none;
+            border-color: var(--cafeteria-primary);
+            box-shadow: 0 0 0 3px rgba(217, 107, 39, 0.16);
         }
 
         .btn-join {
-            padding: 8px 15px;
-            background-color: #fff9c4;
-            border: 1px solid #fbc02d;
+            padding: 10px 18px;
+            background-color: var(--cafeteria-primary);
+            color: #ffffff;
+            border: 2px solid var(--cafeteria-primary);
+            border-bottom-width: 4px;
+            border-bottom-color: #9e430c;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 12px;
+            font-size: 0.98rem;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 2px 6px rgba(43, 36, 29, 0.08);
+            transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+        }
+
+        .btn-join:hover {
+            background-color: var(--cafeteria-primary-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 5px 12px rgba(43, 36, 29, 0.12);
+        }
+
+        .btn-join:active {
+            transform: translateY(1px);
         }
 
         .info-box {
-            border: 1px solid #333;
-            padding: 10px;
-            margin-bottom: 15px;
-            font-weight: bold;
+            border: 1.5px solid #e7c697;
+            background-color: var(--cafeteria-secondary);
+            color: var(--cafeteria-ink);
+            border-radius: 12px;
+            padding: 11px 14px;
+            margin-bottom: 14px;
+            font-weight: 800;
+            font-size: 1rem;
+            letter-spacing: 0.04em;
         }
 
         .member-list {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 8px;
             margin-bottom: 20px;
         }
 
         .member-item {
-            border: 1px solid #333;
-            padding: 8px;
-            background-color: #fff;
+            border: 1px solid var(--cafeteria-border);
+            border-radius: 10px;
+            padding: 10px 14px;
+            background-color: #ffffff;
+            color: var(--cafeteria-ink);
+            font-size: 0.98rem;
+            font-weight: 700;
+            min-height: 20px;
+            box-shadow: 0 2px 5px rgba(43, 36, 29, 0.04);
         }
 
         .footer-buttons {
             display: flex;
             justify-content: space-between;
+            gap: 10px;
         }
 
         .btn-back {
-            padding: 8px 20px;
-            background-color: #fff9c4;
-            border: 1px solid #fbc02d;
+            padding: 11px 18px;
+            background-color: #faf7f2;
+            color: var(--cafeteria-muted);
+            border: 1.5px solid #d8cab6;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: transform 0.12s ease, background-color 0.15s ease, color 0.15s ease;
+        }
+
+        .btn-back:hover {
+            background-color: #f1ebe1;
+            color: var(--cafeteria-ink);
+            transform: translateY(-1px);
+        }
+
+        .btn-back:active {
+            transform: translateY(1px);
         }
 
         .btn-leave {
-            padding: 8px 15px;
-            background-color: #455a64;
-            color: white;
-            border: 1px solid #263238;
+            padding: 11px 16px;
+            background-color: var(--cafeteria-danger-bg);
+            color: var(--cafeteria-danger);
+            border: 1.5px solid var(--cafeteria-danger-border);
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: transform 0.12s ease, background-color 0.15s ease;
         }
 
-        /* ボタンが無効化されたときのスタイル */
+        .btn-leave:hover:not(:disabled) {
+            background-color: #fde6e3;
+            transform: translateY(-1px);
+        }
+
+        .btn-leave:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
         .btn-leave:disabled {
-            background-color: #b0bec5;
-            border-color: #90a4ae;
+            background-color: #f2ece3;
+            color: #9e9182;
+            border-color: #dfd3c3;
             cursor: not-allowed;
-            opacity: 0.7;
+            opacity: 0.75;
+            transform: none;
         }
 
+        .btn-join:focus-visible,
+        .btn-back:focus-visible,
+        .btn-leave:focus-visible {
+            outline: 3px solid #f2a93b;
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 480px) {
+            .screen-container {
+                padding: 16px 14px;
+            }
+
+            .footer-buttons {
+                flex-direction: column-reverse;
+            }
+
+            .btn-back,
+            .btn-leave {
+                width: 100%;
+            }
+        }
     </style>
-
 </head>
-
 <body>
+
+<jsp:include page="../common/userbase.jsp">
+    <jsp:param name="title" value="グループ" />
+    <jsp:param name="showLogout" value="false" />
+</jsp:include>
 
 <div class="screen-container">
 
@@ -166,7 +255,7 @@
 <script>
 
     /**
-     * グループメンバーの人数を判定し、「グループから抜ける」ボタンの有効/無効を切り替える関数
+- グループメンバーの人数を判定し、「グループから抜ける」ボタンの有効/無効を切り替える関数
      */
     function updateLeaveButtonState() {
 
@@ -270,5 +359,4 @@
 </script>
 
 </body>
-
 </html>
