@@ -340,6 +340,7 @@ public class UsersDao extends Dao {
 							"update users set account_status=? where user_number=?");
 					statement.setString(1, "削除済み");
 					statement.setInt(2, users.getUserNumber());
+					count = statement.executeUpdate();
 				} else {
 					statement.close();
 					statement = connection.prepareStatement("delete from users where user_number=?");
