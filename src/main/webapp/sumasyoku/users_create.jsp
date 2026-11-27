@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
  
 <c:import url="/common/base.jsp">
-    <c:param name="title">がくちる</c:param>
+    <c:param name="title">学食システム</c:param>
     <c:param name="scripts"></c:param>
  
     <c:param name="content">
