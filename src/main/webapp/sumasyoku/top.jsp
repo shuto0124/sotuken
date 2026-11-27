@@ -17,32 +17,8 @@
 --cafeteria-danger-border: #efc4be;
 }
 
-@keyframes gamingBg {
-0% {
-background-position: 0% 50%;
-}
-50% {
-background-position: 100% 50%;
-}
-100% {
-background-position: 0% 50%;
-}
-}
-
 body {
-background: linear-gradient(
-135deg,
-#ff2a6d,
-#ff9a00,
-#ffe600,
-#05ffa1,
-#01cdfe,
-#b967ff,
-#ff2a6d
-);
-background-size: 400% 400%;
-animation: gamingBg 8s ease infinite;
-min-height: 100vh;
+background-color: var(--cafeteria-bg);
 color: var(--cafeteria-ink);
 font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
 margin: 0;
@@ -123,13 +99,14 @@ box-shadow: 0 4px 12px rgba(47, 122, 79, 0.08);
 .card-body {
 max-width: 520px;
 margin: 0 auto;
+padding: 24px 20px !important;
 background-color: var(--cafeteria-card) !important;
 border: 1px solid var(--cafeteria-border);
 border-radius: 16px;
 box-shadow: 0 8px 24px rgba(66, 46, 24, 0.08);
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-gap: 12px;
+gap: 16px;
 box-sizing: border-box;
 }
 
@@ -175,14 +152,15 @@ background-color: var(--cafeteria-secondary-hover);
 /* パスワードの変更を下の行で横幅いっぱいに配置 */
 .card-body > .text-center:nth-child(5) {
 grid-column: span 2;
+margin-top: 4px;
 }
 
 .card-body > .text-center:nth-child(5) button {
 background-color: #faf7f2;
 color: var(--cafeteria-muted);
 border: 1.5px solid #d8cab6;
-font-size: 0.95rem;
-min-height: 50px;
+font-size: 0.98rem;
+min-height: 58px;
 }
 
 .card-body > .text-center:nth-child(5) button:hover {
@@ -192,10 +170,10 @@ color: var(--cafeteria-ink);
 
 .card-body button {
 width: 100%;
-min-height: 64px;
-padding: 12px 14px;
-border-radius: 12px;
-font-size: 1.05rem;
+min-height: 84px;
+padding: 16px 14px;
+border-radius: 14px;
+font-size: 1.1rem;
 font-weight: 700;
 line-height: 1.3;
 cursor: pointer;
@@ -221,17 +199,18 @@ outline-offset: 2px;
 @media (max-width: 480px) {
 .card-body {
 grid-template-columns: 1fr;
-padding: 16px !important;
-gap: 10px;
+padding: 18px 16px !important;
+gap: 12px;
 }
 
 .card-body > .text-center:nth-child(5) {
 grid-column: span 1;
+margin-top: 2px;
 }
 
 .card-body button {
-min-height: 56px;
-font-size: 1rem;
+min-height: 68px;
+font-size: 1.05rem;
 }
 }
 </style>
