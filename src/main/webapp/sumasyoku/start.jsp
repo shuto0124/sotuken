@@ -85,15 +85,15 @@ outline-offset: 2px;
 }
 
 .btn-login {
-background-color: var(--cafeteria-accent);
-color: #ffffff;
-border: 2px solid var(--cafeteria-accent);
+background-color: #a3e635;
+color: #1a2e05;
+border: 2px solid #84cc16;
 border-bottom-width: 4px;
-border-bottom-color: #1f5938;
+border-bottom-color: #65a30d;
 }
 
 .btn-login:hover {
-background-color: #256440;
+background-color: #84cc16;
 }
 
 .btn-register {
