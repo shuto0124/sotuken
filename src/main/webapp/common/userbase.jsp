@@ -14,6 +14,10 @@
     boolean showCart = "true".equalsIgnoreCase(request.getParameter("showCart"));
 %>
 
+<%
+    String backPage = request.getParameter("backPage");
+%>
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
@@ -153,12 +157,12 @@
 <div class="card-header <%= showLogout ? "has-logout" : "" %>">
   <div class="top-header-bar">
     <h1><%= headerTitle %></h1>
-    <% if (showCart) { %>
-    	<a href="Cart.action" class="top-cart-link" aria-label="カート">
-    	<span class="top-cart-text">カート</span>
-    	<i class="bi bi-cart"></i>
-    	</a>
-	<% } %>
+<% if (showCart && !"menu".equals(backPage)) { %>
+    <a href="Cart.action" class="top-cart-link" aria-label="カート">
+        <span class="top-cart-text">カート</span>
+        <i class="bi bi-cart"></i>
+    </a>
+<% } %>
 	
     <% if (showLogout) { %>
       <form action="LogoutExecute.action" method="post" class="top-logout-form" onsubmit="return confirm('ログアウトしますか');">

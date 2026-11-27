@@ -219,6 +219,7 @@
     <jsp:param name="title" value="${backPage != 'menu' ? '商品予約' : '商品一覧'}" />
     <jsp:param name="showLogout" value="false" />
     <jsp:param name="showCart" value="true" />
+    <jsp:param name="backPage" value="${backPage}" />
 </jsp:include>
 
 <div class="screen-container">
