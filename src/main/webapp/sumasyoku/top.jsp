@@ -17,12 +17,37 @@
 --cafeteria-danger-border: #efc4be;
 }
 
+@keyframes gamingBg {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
+}
+
 body {
-background-color: var(--cafeteria-bg);
+background: linear-gradient(
+135deg,
+#ff2a6d,
+#ff9a00,
+#ffe600,
+#05ffa1,
+#01cdfe,
+#b967ff,
+#ff2a6d
+);
+background-size: 400% 400%;
+animation: gamingBg 8s ease infinite;
+min-height: 100vh;
 color: var(--cafeteria-ink);
 font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
 margin: 0;
 padding: 20px 14px;
+box-sizing: border-box;
 }
 
 .card-header {
