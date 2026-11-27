@@ -18,12 +18,14 @@
 
 <br>
 
-<a href="Cart.action" class="btn btn-primary position-fixed top-0 end-0 m-3">
-    🛒 カート
-</a>
-
 <c:if test="${empty product}">
     <p>商品がありません。</p>
+</c:if>
+
+<c:if test="${not empty message}">
+    <script>
+        alert("${message}");
+    </script>
 </c:if>
 
 <div style="display:flex; flex-wrap:wrap; gap:40px; width:420px; margin:auto;">
@@ -92,17 +94,14 @@
 <td width="80"></td>
 
 <td>
+<form action="reservation.jsp">
 
-<c:choose>
-   <c:when test="${backPage != 'menu'}">
-        <form action="reservation.jsp" method="get">
-           <button type="submit" style="width:130px;height:50px;font-size:20px;">
-                  注文
-           </button>
-        </form>
-   </c:when>
-</c:choose>
+<button type="submit"
+        style="width:130px;height:50px;font-size:20px;">
+注文
+</button>
 
+</form>
 </td>
 
 </tr>

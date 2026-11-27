@@ -34,6 +34,7 @@ public class ProductListAction extends Action {
     	if (backPage == null) {
     		backPage = "reservation";
     	}
+    	req.setAttribute("message", null);
     	req.setAttribute("backPage", backPage);
     	req.setAttribute("product", product);
     	req.getRequestDispatcher("product_list.jsp").forward(req, res);
