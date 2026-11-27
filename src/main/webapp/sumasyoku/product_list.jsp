@@ -216,7 +216,7 @@
 <body>
 
 <jsp:include page="../common/userbase.jsp">
-    <jsp:param name="title" value="商品予約" />
+    <jsp:param name="title" value="${backPage != 'menu' ? '商品予約' : '商品一覧'}" />
     <jsp:param name="showLogout" value="false" />
     <jsp:param name="showCart" value="true" />
 </jsp:include>
@@ -268,9 +268,15 @@
       </c:when>
     </c:choose>
 
-    <form action="reservation.jsp">
-      <button type="submit" class="btn-order">注文</button>
-    </form>
+    
+    <c:if test="${backPage != 'menu'}">
+      <form action="reservation.jsp">
+          <button type="submit" class="btn-order">
+              注文
+          </button>
+      </form>
+    </c:if>
+    
   </div>
 
 </div>
