@@ -40,7 +40,7 @@
             </c:choose>
 
             <div class="my-2 text-end px-4">
-               <a href="Menu.action" class="btn btn-primary btn-lg">戻る</a>
+               <a href="Managements.action" class="btn btn-primary btn-lg">戻る</a>
             </div>
        </section>
     </c:param>

@@ -39,9 +39,12 @@
     </tr>
 </table>
                 
-                <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 30px;">
-                    <a href="TableUpdate.action" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">変更</a>
-                    <a class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">戻る</a>
+	            <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 30px;">
+                    <button type="submit" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">更新</button>
+                </div>
+                
+                <div class="d-flex justify-content-center" style="margin-top: 30px;">
+                     <a href="TableList.action" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">戻る</a>
                 </div>
 
                 
