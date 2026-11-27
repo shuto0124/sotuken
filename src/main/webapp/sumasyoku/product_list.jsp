@@ -218,6 +218,7 @@
 <jsp:include page="../common/userbase.jsp">
     <jsp:param name="title" value="商品予約" />
     <jsp:param name="showLogout" value="false" />
+    <jsp:param name="showCart" value="true" />
 </jsp:include>
 
 <div class="screen-container">
