@@ -78,6 +78,13 @@ ${product.productDescription}
 
 <c:choose>
 
+    <c:when test="${backPage == 'seat'}">
+        <form action="ProductList.action" method="get">
+            <button type="submit"
+             style="width:130px;height:50px;font-size:20px;">戻る</button>
+        </form>
+    </c:when>
+
     <c:when test="${backPage == 'reservation'}">
         <form action="ProductList.action" method="get">
             <button type="submit"
