@@ -15,29 +15,29 @@
             <form action="TableUpdateExecute.action" method="post">
                 
  
- <table class="table table-bordered w-50 mx-auto text-center align-middle">
-    <tr>
-        <th>テーブル番号</th>
-        <td>${table.tableNumber}</td>
-    </tr>
-    <tr>
-        <th>利用状況</th>
-        <td>${table.tableStatus}</td>
-    </tr>
-    <tr>
-        <th>利用停止にする</th>
-<td>
-    <div class="d-flex justify-content-center align-items-center gap-2">
-        <label class="toggle">
-            <input type="checkbox" id="tableStatus">
-            <span class="slider"></span>
-        </label>
+                 <table class="table table-bordered w-50 mx-auto text-center align-middle">
+                     <tr>
+                        <th>テーブル番号</th>
+                        <td>${table.tableNumber}</td>
+                     </tr>
+                     <tr>
+                        <th>利用状況</th>
+                        <td>${table.tableStatus}</td>
+                     </tr>
+                     <tr>
+                        <th>利用停止にする</th>
+                  <td>
+                     <div class="d-flex justify-content-center align-items-center gap-2">
+                         <label class="toggle">
+                            <input type="checkbox" id="tableStatus">
+                            <span class="slider"></span>
+                         </label>
 
-        <span id="statusText">開始</span>
-    </div>
-</td>
-    </tr>
-</table>
+                      <span id="statusText">開始</span>
+                     </div>
+                 </td>
+                 </tr>
+                </table>
                 
 	            <div class="d-flex flex-column justify-content-center align-items-center" style="gap: 30px;">
                     <button type="submit" class="btn btn-primary btn-lg " style="padding-top: 10px; padding-bottom: 10px;">更新</button>
