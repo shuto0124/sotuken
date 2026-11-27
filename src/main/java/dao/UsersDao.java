@@ -330,17 +330,18 @@ public class UsersDao extends Dao {
 			statement = connection.prepareStatement("select account_status from users where user_number=?");
 			statement.setInt(1, userNumber);
 			ResultSet rSet = statement.executeQuery();
-			if (rSet != null) {
-				statement.close();
+			if (rSet.next()) {
 				Users users = uDao.get(userNumber);
 				String status = rSet.getString("account_status");
 				if (!status.equals("削除済み")) {
 					users.setAccountStatus("削除済み");
+					statement.close();
 					statement = connection.prepareStatement(
 							"update users set account_status=? where user_number=?");
 					statement.setString(1, "削除済み");
 					statement.setInt(2, users.getUserNumber());
 				} else {
+					statement.close();
 					statement = connection.prepareStatement("delete from users where user_number=?");
 					statement.setInt(1, users.getUserNumber());
 					count = statement.executeUpdate();
