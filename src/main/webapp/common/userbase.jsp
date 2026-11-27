@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%
     String headerTitle = request.getParameter("title");
     if (headerTitle == null || headerTitle.isEmpty()) {
@@ -8,6 +9,12 @@
     String showLogoutParam = request.getParameter("showLogout");
     boolean showLogout = !"false".equalsIgnoreCase(showLogoutParam);
 %>
+
+<%
+    boolean showCart = "true".equalsIgnoreCase(request.getParameter("showCart"));
+%>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 <style>
   :root {
@@ -113,11 +120,46 @@
     outline: 3px solid #f2a93b;
     outline-offset: 2px;
   }
+
+  .top-cart-link {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-size: 1.6rem;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .top-cart-link:hover {
+    color: #ffe2bd;
+  }
+
+  .top-cart-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .has-logout .top-cart-link {
+    right: 112px;
+  }
+
+  .top-cart-link:hover {
+    color: #ffe2bd;
+  }
 </style>
 
 <div class="card-header <%= showLogout ? "has-logout" : "" %>">
   <div class="top-header-bar">
     <h1><%= headerTitle %></h1>
+    <% if (showCart) { %>
+    	<a href="Cart.action" class="top-cart-link" aria-label="カート">
+    	<span class="top-cart-text">カート</span>
+    	<i class="bi bi-cart"></i>
+    	</a>
+	<% } %>
+	
     <% if (showLogout) { %>
       <form action="LogoutExecute.action" method="post" class="top-logout-form" onsubmit="return confirm('ログアウトしますか');">
         <button type="submit" class="btn-top-logout">ログアウト</button>
